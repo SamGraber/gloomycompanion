@@ -1,8 +1,8 @@
 import { DeckList } from './deck-list';
 import { ScenarioList } from './scenario-list';
-import { DECK_DEFINITONS } from '../../cards/cards';
+import CardService from '../../cards/cards.service';
 
-(window as any).deck_definitions = (window as any).load_definition(DECK_DEFINITONS);
+(window as any).deck_definitions = CardService.decks;
 
 (window as any).init = () => {
 	const deckspage = document.getElementById('deckspage') as HTMLElement;

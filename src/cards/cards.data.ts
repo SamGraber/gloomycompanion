@@ -1,6 +1,7 @@
 import './cards.css';
+import { MonsterClass } from './monster-class';
 
-export const DECKS =
+export const DECKS: {[key: string]: { name: string, class: MonsterClass }} =
     {   "Ancient Artillery":  {name: "Ancient Artillery", class: "Ancient Artillery"}
     ,   "Bandit Archer":      {name: "Bandit Archer", class: "Archer"}
     ,   "Bandit Guard":       {name: "Bandit Guard", class: "Guard"}
@@ -38,7 +39,7 @@ export const DECKS =
     ,   "Wind Demon":         {name: "Wind Demon", class: "Wind Demon"}
 };
 
-export const DECK_DEFINITONS =
+export const DECK_DEFINITONS: { class: MonsterClass, cards: any[] }[] =
 [
         { class: "Ancient Artillery"
         , cards:
