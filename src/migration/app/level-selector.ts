@@ -1,4 +1,4 @@
-class LevelSelector {
+export class LevelSelector {
     html: HTMLElement;
     spinner: HTMLInputElement;
     private max_level = 7;
@@ -11,7 +11,7 @@ class LevelSelector {
         listitem.innerText = text;
         this.html.appendChild(listitem);
     
-        const level_spinner = create_input("number", "scenario_number", "1", "") as any;
+        const level_spinner = (window as any).create_input("number", "scenario_number", "1", "") as any;
         level_spinner.input.min = 0;
         level_spinner.input.max = this.max_level;
         this.html.appendChild(level_spinner.input);

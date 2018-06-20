@@ -1,6 +1,6 @@
-declare let DECKS: any;
+import { LevelSelector } from './level-selector';
 
-class DeckList {
+export class DeckList {
     ul: HTMLUListElement;
     checkboxes = {} as any;
     levelSelectors = {} as any;
@@ -19,7 +19,7 @@ class DeckList {
         listitem.appendChild(globalLevelSelector.html);
         this.globalLevelSelector = globalLevelSelector;
 
-        const domDict = create_button('button', 'applylevel', 'Apply All');
+        const domDict = (window as any).create_button('button', 'applylevel', 'Apply All');
         domDict.onclick = () => {
             for (const key in this.levelSelectors) {
                 this.levelSelectors[key].set_value(this.globalLevelSelector.get_selection());
@@ -29,10 +29,10 @@ class DeckList {
 
         this.ul.appendChild(listitem);
 
-        for (const key in DECKS) {
-            const realName = DECKS[key].name;
+        for (const key in (window as any).DECKS) {
+            const realName = (window as any).DECKS[key].name;
             const newListItem = document.createElement('li');
-            const newDomDict = create_input('checkbox', 'deck', realName, realName);
+            const newDomDict = (window as any).create_input('checkbox', 'deck', realName, realName);
             newListItem.appendChild(newDomDict.root);
 
             const levelSelector = new LevelSelector(' with level ', true);
@@ -46,13 +46,13 @@ class DeckList {
     }
 
     get_selection() {
-        return dict_values(this.checkboxes).filter(is_checked).map(input_value);
+        return (window as any).dict_values(this.checkboxes).filter((window as any).is_checked).map((window as any).input_value);
     }
 
     get_selected_decks() {
         const selectedCheckbox = this.get_selection();
-        const selectedDecks = concat_arrays(selectedCheckbox.map((name: string) => {
-            const deck = ((name in DECKS) ? DECKS[name] : []);
+        const selectedDecks = (window as any).concat_arrays(selectedCheckbox.map((name: string) => {
+            const deck = ((name in (window as any).DECKS) ? (window as any).DECKS[name] : []);
             deck.level = this.levelSelectors[name].get_selection();
             return deck;
         }));
@@ -60,7 +60,7 @@ class DeckList {
     }
 
     set_selection(selectedDeckNames: any) {
-        dict_values(this.checkboxes).forEach((checkbox) => {
+        (window as any).dict_values(this.checkboxes).forEach((checkbox) => {
             checkbox.checked = false;
         });
 

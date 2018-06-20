@@ -1,6 +1,6 @@
 
 
-function activate_tab(tabs, pages, activetab)
+window.activate_tab = function(tabs, pages, activetab)
 {
     for (key in tabs)
     {
@@ -12,13 +12,13 @@ function activate_tab(tabs, pages, activetab)
     }
 }
 
-function show_settingspane(pane, cancelarea, show)
+window.show_settingspane = function(pane, cancelarea, show)
 {
     pane.className = show ? "pane" : "pane inactive";
     cancelarea.style.display = show ? "initial" : "none";
 }
 
-function init_ui()
+window.init_ui = function()
 {
     var tabs =
     {

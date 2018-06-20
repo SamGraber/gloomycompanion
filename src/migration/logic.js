@@ -1,43 +1,43 @@
 //TODO Adding an extra Guard deck will reshuffle the first one, End of round with multiple Archers, resize text, worth to show common and elite_only attributes?, shield and retaliate only when shown (apparently, attribtues are active at the beginning of the turn, and active after initiative)
-var do_shuffles = true;
-var visible_ability_decks = [];
-var modifier_deck = null;
-var deck_definitions = load_definition(DECK_DEFINITONS);
+window.do_shuffles = true;
+window.visible_ability_decks = [];
+window.modifier_deck = null;
+window.deck_definitions = window.load_definition(DECK_DEFINITONS);
 
-var DECK_TYPES =
-    {
-        MODIFIER: "modifier",
-        ABILITY: "ability",
-        BOSS: "boss"
-    };
+window.DECK_TYPES =
+{
+    MODIFIER: "modifier",
+    ABILITY: "ability",
+    BOSS: "boss"
+};
 
-var EVENT_NAMES = {
-    MODIFIER_CARD_DRAWN:            "modifierCardDrawn",
+window.EVENT_NAMES = {
+    MODIFIER_CARD_DRAWN: "modifierCardDrawn",
     MODIFIER_DECK_SHUFFLE_REQUIRED: "modfierDeckShuffleRequired"
 };
 
-function get_monster_stats(name, level) {
+window.get_monster_stats = function(name, level) {
     var attack = [MONSTER_STATS["monsters"][name]["level"][level]["normal"]["attack"],
-        MONSTER_STATS["monsters"][name]["level"][level]["elite"]["attack"]
+    MONSTER_STATS["monsters"][name]["level"][level]["elite"]["attack"]
     ];
     var move = [MONSTER_STATS["monsters"][name]["level"][level]["normal"]["move"],
-        MONSTER_STATS["monsters"][name]["level"][level]["elite"]["move"]
+    MONSTER_STATS["monsters"][name]["level"][level]["elite"]["move"]
     ];
     var range = [MONSTER_STATS["monsters"][name]["level"][level]["normal"]["range"],
-        MONSTER_STATS["monsters"][name]["level"][level]["elite"]["range"]
+    MONSTER_STATS["monsters"][name]["level"][level]["elite"]["range"]
     ];
     var attributes = [MONSTER_STATS["monsters"][name]["level"][level]["normal"]["attributes"],
-        MONSTER_STATS["monsters"][name]["level"][level]["elite"]["attributes"]
+    MONSTER_STATS["monsters"][name]["level"][level]["elite"]["attributes"]
     ];
 
-    var health =        [   MONSTER_STATS["monsters"][name]["level"][level]["normal"]["health"],
-                            MONSTER_STATS["monsters"][name]["level"][level]["elite"]["health"]
-                        ];	
-	
-    return {"attack": attack, "move": move, "range": range, "attributes": attributes, "health": health};
+    var health = [MONSTER_STATS["monsters"][name]["level"][level]["normal"]["health"],
+    MONSTER_STATS["monsters"][name]["level"][level]["elite"]["health"]
+    ];
+
+    return { "attack": attack, "move": move, "range": range, "attributes": attributes, "health": health };
 }
 
-function get_boss_stats(name, level) {
+window.get_boss_stats = function(name, level) {
     name = name.replace("Boss: ", "");
     var attack = [MONSTER_STATS["bosses"][name]["level"][level]["attack"]];
     var move = [MONSTER_STATS["bosses"][name]["level"][level]["move"]];
@@ -46,7 +46,7 @@ function get_boss_stats(name, level) {
     var special2 = MONSTER_STATS["bosses"][name]["level"][level]["special2"];
     var immunities = MONSTER_STATS["bosses"][name]["level"][level]["immunities"];
     var notes = MONSTER_STATS["bosses"][name]["level"][level]["notes"];
-	var health = [MONSTER_STATS["bosses"][name]["level"][level]["health"]];
+    var health = [MONSTER_STATS["bosses"][name]["level"][level]["health"]];
 
     return {
         "attack": attack,
@@ -55,37 +55,37 @@ function get_boss_stats(name, level) {
         "special1": special1,
         "special2": special2,
         "immunities": immunities,
-        "notes": notes, 
-		"health":health
+        "notes": notes,
+        "health": health
     }
 }
 
-function apply_deck_selection(decks, preserve_existing_deck_state) {
+window.apply_deck_selection = function(decks, preserve_existing_deck_state) {
     var container = document.getElementById("tableau");
     document.getElementById("currentdeckslist").innerHTML = "";
     var decks_to_remove = visible_ability_decks.filter(function (visible_deck) {
         return !preserve_existing_deck_state || (decks.filter(function (deck) {
-                return ((deck.name == visible_deck.name) && (deck.level == visible_deck.level))
-            }).length == 0);
+            return ((deck.name == visible_deck.name) && (deck.level == visible_deck.level))
+        }).length == 0);
     });
 
     var decks_to_add = decks.filter(function (deck) {
         return !preserve_existing_deck_state || (visible_ability_decks.filter(function (visible_deck) {
-                return ((deck.name == visible_deck.name) && (deck.level == visible_deck.level))
-            }).length == 0);
+            return ((deck.name == visible_deck.name) && (deck.level == visible_deck.level))
+        }).length == 0);
     });
 
     if (!modifier_deck) {
         init_modifier_deck();
-        add_modifier_deck(container, modifier_deck,preserve_existing_deck_state);
+        add_modifier_deck(container, modifier_deck, preserve_existing_deck_state);
         if (preserve_existing_deck_state) {
             var loaded_modifier_deck = JSON.parse(get_from_storage("modifier_deck"));
             var curses = count_type("curse", loaded_modifier_deck);
             var blessings = count_type("bless", loaded_modifier_deck);
-            for (var i =0; i < blessings; i++) {
+            for (var i = 0; i < blessings; i++) {
                 modifier_deck.add_card("bless");
             }
-            for (var i =0; i < curses; i++) {
+            for (var i = 0; i < curses; i++) {
                 modifier_deck.add_card("curse");
             }
             modifier_deck.draw_top_discard();
@@ -96,7 +96,7 @@ function apply_deck_selection(decks, preserve_existing_deck_state) {
     else if (!preserve_existing_deck_state) {
         container.removeChild(document.getElementById("modifier-container"));
         init_modifier_deck();
-        add_modifier_deck(container, modifier_deck,preserve_existing_deck_state);
+        add_modifier_deck(container, modifier_deck, preserve_existing_deck_state);
     }
     write_to_storage("modifier_deck", JSON.stringify(modifier_deck));
 
@@ -108,7 +108,7 @@ function apply_deck_selection(decks, preserve_existing_deck_state) {
         var deckid = deck.get_real_name().replace(/\s+/g, '');
         var deck_space = document.createElement("div");
         deck_space.id = deckid;
-        deck_space.addEventListener('contextmenu', function(e) {            
+        deck_space.addEventListener('contextmenu', function (e) {
             this.className = "hiddendeck";
             e.preventDefault();
         }, false);
@@ -147,11 +147,11 @@ function apply_deck_selection(decks, preserve_existing_deck_state) {
         if (preserve_existing_deck_state) {
             deck.draw_top_discard();
         } else {
-            force_repaint_deck(deck);
+            window.force_repaint_deck(deck);
         }
         visible_ability_decks.push(deck);
-        
-        var currentdeckslist = document.getElementById("currentdeckslist");        
+
+        var currentdeckslist = document.getElementById("currentdeckslist");
         var list_item = document.createElement("li");
         list_item.className = "currentdeck";
         currentdeckslist.appendChild(list_item);
@@ -160,8 +160,8 @@ function apply_deck_selection(decks, preserve_existing_deck_state) {
         label.href = "#switch-" + deckid
         label.innerText = deck.get_real_name();
         label.title = "Click to show/hide deck";
-        label.addEventListener("click", function(e){
-            var d = document.getElementById(this.id.replace("switch-",""));
+        label.addEventListener("click", function (e) {
+            var d = document.getElementById(this.id.replace("switch-", ""));
             d.className = (d.className == "hiddendeck") ? "card-container" : "hiddendeck";
         }, false)
         list_item.appendChild(label);
@@ -171,11 +171,11 @@ function apply_deck_selection(decks, preserve_existing_deck_state) {
     refresh_ui();
 }
 
-function init_modifier_deck() {
+window.init_modifier_deck = function() {
     modifier_deck = load_modifier_deck();
 }
 
-function count_type(type, deck) {
+window.count_type = function(type, deck) {
     var count = 0;
     if (deck) {
         for (var i = 0; i < deck.draw_pile.length; i++) {
@@ -187,8 +187,8 @@ function count_type(type, deck) {
     return count;
 }
 
-function add_modifier_deck(container, deck, preserve_discards) {
-    function create_counter(card_type, increment_func, decrement_func, title) {
+window.add_modifier_deck = function(container, deck, preserve_discards) {
+    function create_counter (card_type, increment_func, decrement_func, title) {
         function create_button(class_name, text, func, text_element) {
             var button = document.createElement("div");
             button.className = class_name + " button";
@@ -226,11 +226,11 @@ function add_modifier_deck(container, deck, preserve_discards) {
         return widget_container;
     }
 
-    function indicate_shuffle_required(e){
-        if (e.detail.shuffle){
-            window.setTimeout(function() { end_round_div.className = "counter-icon shuffle"; }, 400);
+    function indicate_shuffle_required (e) {
+        if (e.detail.shuffle) {
+            window.setTimeout(function () { end_round_div.className = "counter-icon shuffle"; }, 400);
         }
-        else{
+        else {
             end_round_div.className = "counter-icon shuffle not-required";
         }
     }

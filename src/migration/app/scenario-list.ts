@@ -1,6 +1,8 @@
+import { LevelSelector } from './level-selector';
+
 declare const SPECIAL_RULES: any;
 
-class ScenarioList {
+export class ScenarioList {
     ul: HTMLUListElement;
     spinner: HTMLInputElement;
     decks = {} as any;
@@ -25,7 +27,7 @@ class ScenarioList {
         listitem.innerText = 'Select scenario number';
         this.ul.appendChild(listitem);
     
-        const scenario_spinner = create_input('number', 'scenario_number', '1', '') as any;
+        const scenario_spinner = (window as any).create_input('number', 'scenario_number', '1', '') as any;
         scenario_spinner.input.min = 1;
         scenario_spinner.input.max = scenarios.length;
         this.ul.appendChild(scenario_spinner.input);
@@ -51,10 +53,10 @@ class ScenarioList {
 
     get_scenario_decks() {
         return (this.decks[this.get_selection()].map((deck: any) => {
-            if (DECKS[deck.name]) {
-                deck.class = DECKS[deck.name].class;
+            if ((window as any).DECKS[deck.name]) {
+                deck.class = (window as any).DECKS[deck.name].class;
             } else if (deck.name.indexOf('Boss') !== -1) {
-                deck.class = DECKS.Boss.class;
+                deck.class = (window as any).DECKS.Boss.class;
             }
             deck.level = this.get_level(deck.name, this.get_special_rules());
             return deck;

@@ -1,5 +1,5 @@
 
-function shuffle_list(l)
+window.shuffle_list = function(l)
 {
     for (var i = 0; i < l.length-1; i++)
     {
@@ -11,7 +11,7 @@ function shuffle_list(l)
     }
 }
 
-function toggle_class(element, class_name, enable_class)
+window.toggle_class = function(element, class_name, enable_class)
 {
     if (enable_class)
     {
@@ -23,7 +23,7 @@ function toggle_class(element, class_name, enable_class)
     }
 }
 
-function remove_child(myNode)
+window.remove_child = function(myNode)
 {
     while (myNode.firstChild)
     {
@@ -31,7 +31,7 @@ function remove_child(myNode)
     }
 }
 
-function create_input(type, name, value, text)
+window.create_input = function(type, name, value, text)
 {
     var input = document.createElement("input");
     input.type = type;
@@ -48,7 +48,7 @@ function create_input(type, name, value, text)
     return {'root': label, 'input': input};
 }
 
-function create_button(type, id, value)
+window.create_button = function(type, id, value)
 {
     var button = document.createElement("button");
     button.type = type;
@@ -59,7 +59,7 @@ function create_button(type, id, value)
     return button;
 }
 
-function dict_values(dict)
+window.dict_values = function(dict)
 {
     var values = [];
     for (key in dict) {
@@ -69,36 +69,36 @@ function dict_values(dict)
     return values;
 }
 
-function concat_arrays(arrays)
+window.concat_arrays = function(arrays)
 {
     return Array.prototype.concat.apply([], arrays);
 }
 
-function is_checked(input)
+window.is_checked = function(input)
 {
     return (('checked' in input) ? input.checked : false);
 }
 
-function input_value(input)
+window.input_value = function(input)
 {
     return (('value' in input) ? input.value : '');
 }
 
-function remove_empty_strings(array)
+window.remove_empty_strings = function(array)
 {
     return array.filter(Boolean);
 }
 
-function write_to_storage(name, value) {
+window.write_to_storage = function(name, value) {
     localStorage.setItem(name, value);
     console.log("Wrote " + name + " to local storage, with value: " + value);
 }
 
-function get_from_storage(name) {
+window.get_from_storage = function(name) {
     return localStorage.getItem(name);
 }
 
-function find_in_discard(discard, id) {
+window.find_in_discard = function(discard, id) {
     for (var i=0; i < discard.length; i++) {
         if (discard[i].id === id) {
             return discard[i];

@@ -1,5 +1,5 @@
 /* Macros used in card text, alphabetical order */
-MACROS =
+window.MACROS =
     { "%air%":                                      "<img class='element' src='images/air.svg'>"
     , "%any%":                                      "<img class='element' src='images/any_element.svg'>"
     , "%aoe-4-with-black%":                         "<img class='aoe h2' src='images/aoe-4-with-black.svg'>"
@@ -47,7 +47,7 @@ MACROS =
     , "%wound%":                                    "<span class='nobr'>WOUND <img class='icon' src='images/wound.svg'></span>"
     };
 
-function expand_macro(macro)
+window.expand_macro = function(macro)
 {
     var key = macro.toLowerCase();
     if (key in MACROS)
@@ -60,7 +60,7 @@ function expand_macro(macro)
     }
 }
 
-function expand_stat(s, stat, value)
+window.expand_stat = function(s, stat, value)
 {
     var re = new RegExp("%" + stat + "% (\\+|-)(\\d*)", "g");
     var line_parsed = re.exec(s);
@@ -107,7 +107,7 @@ function expand_stat(s, stat, value)
     return s;
 }
 
-function attributes_to_lines(attributes)
+window.attributes_to_lines = function(attributes)
 {
     if (!attributes || (attributes[0].length == 0 && attributes[1].length == 0))
     {
@@ -151,7 +151,7 @@ function attributes_to_lines(attributes)
     }
 }
 
-function immunities_to_lines(immunities)
+window.immunities_to_lines = function(immunities)
 {
     if (!immunities)
     {
@@ -173,12 +173,12 @@ function immunities_to_lines(immunities)
     }
 }
 
-function notes_to_lines(notes)
+window.notes_to_lines = function(notes)
 {
     return ["* <span class='small'> Notes: " + notes + "</span>"];
 }
 
-function expand_special(s, special_value)
+window.expand_special = function(s, special_value)
 {
     var value = "";
 
@@ -187,7 +187,7 @@ function expand_special(s, special_value)
     });
 }
 
-function special_to_lines(s, special1, special2)
+window.special_to_lines = function(s, special1, special2)
 {
     if (special1 && s.indexOf("Special 1") !== -1)
     {
@@ -201,7 +201,7 @@ function special_to_lines(s, special1, special2)
     return s;
 }
 
-function expand_string(s, attack, move, range)
+window.expand_string = function(s, attack, move, range)
 {
     var re = new RegExp("%(attack|move|range)% (\\+|-)(\\d*)", "g");
     
