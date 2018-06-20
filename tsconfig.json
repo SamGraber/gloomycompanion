@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
-        "outFile": "./build/bundle.js",
+		"outFile": "./build/bundle.js",
+		"sourceMap": true,
         "allowJs": true,
         "target": "es5"
     },
