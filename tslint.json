@@ -5,5 +5,37 @@
       "config/**/*.js",
       "node_modules/**/*.ts"
     ]
+  },
+  "rules": {
+    "ordered-imports": [true, {
+      "import-sources-order": "any",
+      "named-imports-order": "case-insensitive"
+    }],
+    "member-access": false,
+    "object-literal-sort-keys": false,
+    "variable-name": [
+      true, 
+      "check-format", 
+      "allow-leading-underscore",
+      "allow-pascal-case",
+      "allow-snake-case"
+    ],
+    "array-type": [true, "array"],
+    "forin": false
+  },
+  "jsRules": {
+    "ordered-imports": false,
+    "member-access": false,
+    "object-literal-sort-keys": false,
+    "variable-name": false,
+    "array-type": false,
+    "no-string-literal": false,
+    "triple-equals": false,
+    "no-duplicate-variable": false,
+    "no-empty": false,
+    "no-shadowed-variable": false,
+    "no-conditional-assignment": false,
+    "forin": false,
+    "no-console": false
   }
 }

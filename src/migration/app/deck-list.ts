@@ -1,52 +1,46 @@
-declare var create_button;
-declare var create_input;
-declare var DECKS;
-declare var dict_values;
-declare var is_checked;
-declare var input_value;
-declare var concat_arrays;
+declare let DECKS: any;
 
 class DeckList {
     ul: HTMLUListElement;
     checkboxes = {} as any;
-    level_selectors = {} as any;
-    global_level_selector = null as any;
+    levelSelectors = {} as any;
+    globalLevelSelector = null as any;
 
     constructor() {
         this.ul = document.createElement('ul');
         this.ul.className = 'selectionlist';
         this.checkboxes = {};
-        this.level_selectors = {};
-        this.global_level_selector = null;
+        this.levelSelectors = {};
+        this.globalLevelSelector = null;
 
 
-        var listitem = document.createElement('li');
-        var global_level_selector = new LevelSelector('Select global level ', true);
-        listitem.appendChild(global_level_selector.html);
-        this.global_level_selector = global_level_selector;
+        const listitem = document.createElement('li');
+        const globalLevelSelector = new LevelSelector('Select global level ', true);
+        listitem.appendChild(globalLevelSelector.html);
+        this.globalLevelSelector = globalLevelSelector;
 
-        var dom_dict = create_button('button', 'applylevel', 'Apply All');
-        dom_dict.onclick = () => {
-            for (const key in this.level_selectors) {
-                this.level_selectors[key].set_value(this.global_level_selector.get_selection());
+        const domDict = create_button('button', 'applylevel', 'Apply All');
+        domDict.onclick = () => {
+            for (const key in this.levelSelectors) {
+                this.levelSelectors[key].set_value(this.globalLevelSelector.get_selection());
             }
         };
-        listitem.appendChild(dom_dict);
+        listitem.appendChild(domDict);
 
         this.ul.appendChild(listitem);
 
         for (const key in DECKS) {
-            var real_name = DECKS[key].name;
-            var listitem = document.createElement('li');
-            var dom_dict = create_input('checkbox', 'deck', real_name, real_name);
-            listitem.appendChild(dom_dict.root);
+            const realName = DECKS[key].name;
+            const newListItem = document.createElement('li');
+            const newDomDict = create_input('checkbox', 'deck', realName, realName);
+            newListItem.appendChild(newDomDict.root);
 
-            var level_selector = new LevelSelector(' with level ', true);
-            listitem.appendChild(level_selector.html);
+            const levelSelector = new LevelSelector(' with level ', true);
+            newListItem.appendChild(levelSelector.html);
 
-            this.ul.appendChild(listitem);
-            this.checkboxes[real_name] = dom_dict.input;
-            this.level_selectors[real_name] = level_selector;
+            this.ul.appendChild(newListItem);
+            this.checkboxes[realName] = newDomDict.input;
+            this.levelSelectors[realName] = levelSelector;
 
         }
     }
@@ -56,26 +50,26 @@ class DeckList {
     }
 
     get_selected_decks() {
-        var selected_checkbox = this.get_selection();
-        var selected_decks = concat_arrays(selected_checkbox.map(function (name) {
-            var deck = ((name in DECKS) ? DECKS[name] : []);
-            deck.level = this.level_selectors[name].get_selection();
+        const selectedCheckbox = this.get_selection();
+        const selectedDecks = concat_arrays(selectedCheckbox.map((name: string) => {
+            const deck = ((name in DECKS) ? DECKS[name] : []);
+            deck.level = this.levelSelectors[name].get_selection();
             return deck;
-        }.bind(this)));
-        return selected_decks;
+        }));
+        return selectedDecks;
     }
 
-    set_selection(selected_deck_names) {
-        dict_values(this.checkboxes).forEach(function (checkbox) {
+    set_selection(selectedDeckNames: any) {
+        dict_values(this.checkboxes).forEach((checkbox) => {
             checkbox.checked = false;
         });
 
-        selected_deck_names.forEach(function (deck_names) {
-            var checkbox = this.checkboxes[deck_names.name];
+        selectedDeckNames.forEach((deckNames: any) => {
+            const checkbox = this.checkboxes[deckNames.name];
             if (checkbox) {
                 checkbox.checked = true;
-                this.level_selectors[deck_names.name].set_value(deck_names.level);
+                this.levelSelectors[deckNames.name].set_value(deckNames.level);
             }
-        }.bind(this));
+        });
     }
 }

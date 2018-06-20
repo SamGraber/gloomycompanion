@@ -75,16 +75,16 @@ function expand_stat(s, stat, value)
     {
         var symbol = (value_parsed[2] == "-") ? "-" : "+";
         extra_text_for_particular_bosses = value_parsed[3] + symbol;
-        normal_attack = (value_parsed[1] !== "") ? parseInt(value_parsed[1]) : 0;
+        normal_attack = (value_parsed[1] !== "") ? parseInt(value_parsed[1], undefined) : 0;
     }
 
     if (line_parsed) {
         if (line_parsed[1] === "+")
         {
-            var value_normal = normal_attack + parseInt(line_parsed[2]);
+            var value_normal = normal_attack + parseInt(line_parsed[2], undefined);
             if (has_elite_value)
             {
-                var value_elite = value[1] + parseInt(line_parsed[2]);
+                var value_elite = value[1] + parseInt(line_parsed[2], undefined);
                 return ("%" + stat + "% " + value_normal + " / <span class='elite-color'>" + value_elite + "</span>");
             } else
             {
@@ -92,10 +92,10 @@ function expand_stat(s, stat, value)
             }
         } else if (line_parsed[1] === "-")
         {
-            var value_normal = normal_attack - parseInt(line_parsed[2]);
+            var value_normal = normal_attack - parseInt(line_parsed[2], undefined);
             if (has_elite_value)
             {
-                var value_elite = value[1] - parseInt(line_parsed[2]);
+                var value_elite = value[1] - parseInt(line_parsed[2], undefined);
                 return ("%" + stat + "% " + value_normal + " / <span class='elite-color'>" + value_elite + "</span>");
             } else
             {

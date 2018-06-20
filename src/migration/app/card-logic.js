@@ -1,9 +1,9 @@
 
-function UICard(front_element, back_element) {
-    var card = {};
+function UICard(frontElement, backElement) {
+    let card = {};
 
-    card.back = back_element;
-    card.front = front_element;
+    card.back = backElement;
+    card.front = frontElement;
 
     card.flip_up = function (faceup) {
         toggle_class(this.back, "up", !faceup);
@@ -23,14 +23,14 @@ function UICard(front_element, back_element) {
         this.front.style.zIndex -= 1;
     }
 
-    card.addClass = function (class_name) {
-        this.front.classList.add(class_name);
-        this.back.classList.add(class_name);
+    card.addClass = function (className) {
+        this.front.classList.add(className);
+        this.back.classList.add(className);
     }
 
-    card.removeClass = function (class_name) {
-        this.front.classList.remove(class_name);
-        this.back.classList.remove(class_name);
+    card.removeClass = function (className) {
+        this.front.classList.remove(className);
+        this.back.classList.remove(className);
     }
 
     card.attach = function (parent) {
@@ -44,144 +44,144 @@ function UICard(front_element, back_element) {
 }
 
 function create_ability_card_back(name, level) {
-    var card = document.createElement("div");
+    let card = document.createElement("div");
     card.className = "gl-card ability back down";
 
-    var name_span = document.createElement("span");
-    name_span.className = "name";
-    name_span.innerText = name + "-" + level;
-    card.appendChild(name_span);
+    let nameSpan = document.createElement("span");
+    nameSpan.className = "name";
+    nameSpan.innerText = name + "-" + level;
+    card.appendChild(nameSpan);
 
     return card;
 }
 
 function create_ability_card_front(initiative, name, shuffle, lines, attack, move, range, level, health) {
-    var card = document.createElement("div");
+    let card = document.createElement("div");
     card.className = "gl-card ability front down";
 
-    var name_span = document.createElement("span");
-    name_span.className = "name";
-    name_span.innerText = name + "-" + level;
-    card.appendChild(name_span);
+    let nameSpan = document.createElement("span");
+    nameSpan.className = "name";
+    nameSpan.innerText = name + "-" + level;
+    card.appendChild(nameSpan);
 
 	
-	var healthNormal_span = document.createElement("span");
-    healthNormal_span.className = "healthNormal";
-    healthNormal_span.innerText = "HP " + health[0];
-    card.appendChild(healthNormal_span);
+	let healthNormalSpan = document.createElement("span");
+    healthNormalSpan.className = "healthNormal";
+    healthNormalSpan.innerText = "HP " + health[0];
+    card.appendChild(healthNormalSpan);
 	
 	if ( health[1] > 0 ) {
-		var healthElite_span = document.createElement("span");
-		healthElite_span.className = "healthElite";
-		healthElite_span.innerText = "HP " + health[1];
-		card.appendChild(healthElite_span);
+		let healthEliteSpan = document.createElement("span");
+		healthEliteSpan.className = "healthElite";
+		healthEliteSpan.innerText = "HP " + health[1];
+		card.appendChild(healthEliteSpan);
 	}
 	
 	
-    var initiative_span = document.createElement("span");
-    initiative_span.className = "initiative";
-    initiative_span.innerText = initiative;
-    card.appendChild(initiative_span);
+    let initiativeSpan = document.createElement("span");
+    initiativeSpan.className = "initiative";
+    initiativeSpan.innerText = initiative;
+    card.appendChild(initiativeSpan);
 
     if (shuffle) {
-        var shuffle_img = document.createElement("img");
-        shuffle_img.src = "images/shuffle.svg";
-        card.appendChild(shuffle_img);
+        let shuffleImg = document.createElement("img");
+        shuffleImg.src = "images/shuffle.svg";
+        card.appendChild(shuffleImg);
     }
 
-    var current_depth = 0;
-    var current_parent = card;
+    let currentDepth = 0;
+    let currentParent = card;
 
     lines = remove_empty_strings(lines);
-    for (var i = 0; i < lines.length; i++) {
-        var line = lines[i];
+    for (let i = 0; i < lines.length; i++) {
+        let line = lines[i];
 
-        var new_depth = 0;
+        let newDepth = 0;
         while (line.indexOf("*") >= 0) {
-            new_depth += 1;
+            newDepth += 1;
             line = line.substr(1);
         }
-        var diff = new_depth - current_depth;
+        let diff = newDepth - currentDepth;
 
-        while (current_depth != new_depth) {
+        while (currentDepth !== newDepth) {
             if (diff > 0) {
                 // Need one level lower, create <ul>
-                var list = document.createElement("ul");
+                let list = document.createElement("ul");
                 // Dynamically adapt the size to the line length. I found this the sweet spot to read all the cards
                 if (lines.length > 5) {
                     list.style.fontSize = (100 - (lines.length * 2.5)) + "%";
                 }
-                current_parent.appendChild(list);
-                current_parent = list;
+                currentParent.appendChild(list);
+                currentParent = list;
 
                 // Create <li>
-                var list_item = document.createElement("li");
-                current_parent.appendChild(list_item);
-                current_parent = list_item;
+                const newListItem = document.createElement("li");
+                currentParent.appendChild(newListItem);
+                currentParent = newListItem;
 
-                current_depth += 1;
+                currentDepth += 1;
             }
             else {
                 // Need to go up in the list, pop <li>
-                current_parent = current_parent.parentElement;
+                currentParent = currentParent.parentElement;
 
                 // pop <ul>
-                current_parent = current_parent.parentElement;
+                currentParent = currentParent.parentElement;
 
-                current_depth -= 1;
+                currentDepth -= 1;
             }
         }
 
-        if ((current_depth > 0) && (diff <= 0)) {
+        if ((currentDepth > 0) && (diff <= 0)) {
             // Same level, pop the previous <li>
-            current_parent = current_parent.parentElement;
+            currentParent = currentParent.parentElement;
 
             // create sibling <li>
-            var list_item = document.createElement("li");
-            current_parent.appendChild(list_item);
-            current_parent = list_item;
+            const newListItem = document.createElement("li");
+            currentParent.appendChild(newListItem);
+            currentParent = newListItem;
         }
 
         text = expand_string(line.trim(), attack, move, range);
-        current_parent.insertAdjacentHTML("beforeend", text);
+        currentParent.insertAdjacentHTML("beforeend", text);
     }
 
     return card;
 }
 
-function load_ability_deck(deck_class, deck_name, level) {
-    var deck_definition = deck_definitions[deck_class];
-    deck_definition.name = deck_name;
-    deck_definition.level = level;
+function load_ability_deck(deckClass, deckName, level) {
+    let deckDefinition = deck_definitions[deckClass];
+    deckDefinition.name = deckName;
+    deckDefinition.level = level;
 
-    var loaded_deck = JSON.parse(get_from_storage(deck_name));
+    let loadedDeck = JSON.parse(get_from_storage(deckName));
 
 
-    var deck = {
-        class: deck_definition.class,
-        name: deck_definition.name,
+    let deck = {
+        class: deckDefinition.class,
+        name: deckDefinition.name,
         type: DECK_TYPES.ABILITY,
         draw_pile: [],
         discard: [],
         move: [0, 0],
         attack: [0, 0],
         range: [0, 0],
-        level: deck_definition.level,
+        level: deckDefinition.level,
 		health: [0,0]
     }
 
-    for (var i = 0; i < deck_definition.cards.length; i++) {
-        var definition = deck_definition.cards[i];
-        var shuffle = definition[0];
-        var initiative = definition[1];
-        var lines = definition.slice(2);
+    for (let i = 0; i < deckDefinition.cards.length; i++) {
+        let definition = deckDefinition.cards[i];
+        let shuffle = definition[0];
+        let initiative = definition[1];
+        let lines = definition.slice(2);
 
-        var empty_front = document.createElement("div");
+        let empty_front = document.createElement("div");
         empty_front.className = "gl-card ability front down";
-        var card_front = empty_front;
-        var card_back = create_ability_card_back(deck.name, deck.level);
+        let card_front = empty_front;
+        let card_back = create_ability_card_back(deck.name, deck.level);
 
-        var card = {
+        let card = {
             id: deck.name + '_' + i,
             ui: new UICard(card_front, card_back),
             shuffle_next: shuffle,
@@ -189,10 +189,10 @@ function load_ability_deck(deck_class, deck_name, level) {
             starting_lines: lines,
         };
 
-        card.paint_front_card = function (name, lines, attack, move, range, level, health) {
-            this.ui.front = create_ability_card_front(this.initiative, name, this.shuffle_next, lines, attack, move, range, level, health);
+        card.paint_front_card = function (name, cardLines, attack, move, range, cardLevel, health) {
+            this.ui.front = create_ability_card_front(this.initiative, name, this.shuffle_next, cardLines, attack, move, range, cardLevel, health);
         }
-        if (loaded_deck && find_in_discard(loaded_deck.discard, card.id)) {
+        if (loadedDeck && find_in_discard(loadedDeck.discard, card.id)) {
             deck.discard.push(card);
         } else {
             deck.draw_pile.push(card);
@@ -200,11 +200,11 @@ function load_ability_deck(deck_class, deck_name, level) {
     }
     deck.draw_top_discard = function() {
         if (this.discard.length > 0) {
-            var card = this.discard[this.discard.length-1];
-            var cards_lines = card.starting_lines;
-            var extra_lines = [];
+            let cardToDiscard = this.discard[this.discard.length-1];
+            let cards_lines = cardToDiscard.starting_lines;
+            let extra_lines = [];
             if (this.is_boss()) {
-                var new_lines = [];
+                let new_lines = [];
                 cards_lines.forEach(function (line) {
                     new_lines = new_lines.concat(special_to_lines(line, deck.special1, deck.special2));
                 });
@@ -223,23 +223,23 @@ function load_ability_deck(deck_class, deck_name, level) {
 
             }
 
-            card.paint_front_card(this.get_real_name(), cards_lines.concat(extra_lines), this.attack, this.move, this.range, this.level, this.health);
+            cardToDiscard.paint_front_card(this.get_real_name(), cards_lines.concat(extra_lines), this.attack, this.move, this.range, this.level, this.health);
 
-            card.ui.set_depth(-3);
-            card.ui.addClass("pull");
-            card.ui.flip_up(true);
-            card.ui.removeClass("draw");
-            card.ui.addClass("discard");
+            cardToDiscard.ui.set_depth(-3);
+            cardToDiscard.ui.addClass("pull");
+            cardToDiscard.ui.flip_up(true);
+            cardToDiscard.ui.removeClass("draw");
+            cardToDiscard.ui.addClass("discard");
         }
         force_repaint_deck(this);
     }
 
     deck.draw_top_card = function () {
 
-        var cards_lines = this.draw_pile[0].starting_lines;
-        var extra_lines = [];
+        let cards_lines = this.draw_pile[0].starting_lines;
+        let extra_lines = [];
         if (this.is_boss()) {
-            var new_lines = [];
+            let new_lines = [];
             cards_lines.forEach(function (line) {
                 new_lines = new_lines.concat(special_to_lines(line, deck.special1, deck.special2));
             });
@@ -296,16 +296,16 @@ function load_ability_deck(deck_class, deck_name, level) {
     }
 
     deck.is_boss = function () {
-        return this.class == DECKS["Boss"].class;
+        return this.class === DECKS.Boss.class;
     }
 
     deck.set_card_piles = function (draw_pile, discard_pile) {
-        for (var i = 0; i < draw_pile.length; i++) {
+        for (let i = 0; i < draw_pile.length; i++) {
             this.draw_pile[i].shuffle_next = draw_pile[i].shuffle_next;
             this.draw_pile[i].initiative = draw_pile[i].initiative;
             this.draw_pile[i].starting_lines = draw_pile[i].starting_lines;
         }
-        for (var i = 0; i < discard_pile.length; i++) {
+        for (let i = 0; i < discard_pile.length; i++) {
             this.discard[i].shuffle_next = discard_pile[i].shuffle_next;
             this.discard[i].initiative = discard_pile[i].initiative;
             this.discard[i].starting_lines = discard_pile[i].starting_lines;
@@ -318,12 +318,12 @@ function load_ability_deck(deck_class, deck_name, level) {
 }
 
 function place_deck(deck, container) {
-    for (var i = 0; i < deck.draw_pile.length; i++) {
-        var card = deck.draw_pile[i];
+    for (let i = 0; i < deck.draw_pile.length; i++) {
+        let card = deck.draw_pile[i];
         card.ui.attach(container);
     }
-    for (var i = 0; i < deck.discard.length; i++) {
-        var card = deck.discard[i];
+    for (let i = 0; i < deck.discard.length; i++) {
+        let card = deck.discard[i];
         card.ui.attach(container);
     }
     deck.deck_space = container;
@@ -331,24 +331,24 @@ function place_deck(deck, container) {
 
 function force_repaint_deck(deck) {
     prevent_pull_animation(deck);
-    var space = deck.deck_space;
+    let space = deck.deck_space;
     remove_child(space);
     place_deck(deck, space);
 }
 
 // This should be dynamic dependant on lines per card
 function refresh_ui() {
-    var actual_card_height = 296;
-    var base_font_size = 26.6;
+    let actual_card_height = 296;
+    let base_font_size = 26.6;
 
-    var tableau = document.getElementById("tableau");
-    var cards = tableau.getElementsByClassName("gl-card");
-    for (var i = 1; i < cards.length; i++) {
+    let tableau = document.getElementById("tableau");
+    let cards = tableau.getElementsByClassName("gl-card");
+    for (let i = 1; i < cards.length; i++) {
         if (cards[i].className.indexOf("ability") !== -1) {
-            var scale = cards[i].getBoundingClientRect().height / actual_card_height;
-            var scaled_font_size = base_font_size * scale;
+            let scale = cards[i].getBoundingClientRect().height / actual_card_height;
+            let scaled_font_size = base_font_size * scale;
 
-            var font_pixel_size = Math.min(scaled_font_size, base_font_size);
+            let font_pixel_size = Math.min(scaled_font_size, base_font_size);
             tableau.style.fontSize = font_pixel_size + "px";
             break;
         }
@@ -360,8 +360,8 @@ function reshuffle(deck, include_discards) {
 
     // This way we keep sync several decks from the same class
     visible_ability_decks.forEach(function (visible_deck) {
-        if ((visible_deck !== deck) && (visible_deck.class == deck.class)) {
-            var real_name = visible_deck.get_real_name();
+        if ((visible_deck !== deck) && (visible_deck.class === deck.class)) {
+            let real_name = visible_deck.get_real_name();
             shuffle_deck(visible_deck, include_discards);
             visible_deck.set_card_piles(deck.draw_pile, deck.discard);
         }
@@ -376,8 +376,8 @@ function shuffle_deck(deck, include_discards) {
 
     shuffle_list(deck.draw_pile);
 
-    for (var i = 0; i < deck.draw_pile.length; i++) {
-        var card = deck.draw_pile[i];
+    for (let i = 0; i < deck.draw_pile.length; i++) {
+        let card = deck.draw_pile[i];
 
         card.ui.removeClass("lift");
         card.ui.removeClass("pull");
@@ -392,18 +392,18 @@ function shuffle_deck(deck, include_discards) {
 }
 
 function flip_up_top_card(deck) {
-    for (var i = 0; i < deck.discard.length; i++) {
-        var card = deck.discard[i];
-        card.ui.removeClass("lift");
-        card.ui.removeClass("pull");
-        card.ui.push_down();
+    for (let i = 0; i < deck.discard.length; i++) {
+        let cardToFlip = deck.discard[i];
+        cardToFlip.ui.removeClass("lift");
+        cardToFlip.ui.removeClass("pull");
+        cardToFlip.ui.push_down();
     }
 
     if (deck.discard.length > 0) {
         deck.discard[0].ui.addClass("lift");
     }
 
-    var card = deck.draw_pile.shift(card);
+    let card = deck.draw_pile.shift(card);
     send_to_discard(card, pull_animation = true);
     deck.discard.unshift(card);
 }
@@ -428,7 +428,7 @@ function draw_ability_card(deck) {
     }
     else {
         visible_ability_decks.forEach(function (visible_deck) {
-            if (visible_deck.class == deck.class) {
+            if (visible_deck.class === deck.class) {
                 visible_deck.draw_top_card();
                 flip_up_top_card(visible_deck);
             }
@@ -481,11 +481,11 @@ function draw_modifier_card(deck) {
 }
 
 function double_draw(deck) {
-    var advantage_card;
+    let advantage_card;
     // Case there was 1 card in draw_pile when we clicked "draw 2".
     //    now we should draw, save that card, reshuffle, and
     //    draw the next
-    if (deck.draw_pile.length == 1) {
+    if (deck.draw_pile.length === 1) {
         draw_modifier_card(deck);
         advantage_card = deck.discard[0];
         reshuffle_modifier_deck(deck);
@@ -497,7 +497,7 @@ function double_draw(deck) {
     // Case there were 0 cards in draw_pile when we clicked "draw 2".
     //    we should reshuffle, draw 1 and send it to advantage_place,
     //    draw the next
-    else if (deck.draw_pile.length == 0) {
+    else if (deck.draw_pile.length === 0) {
         // This is in case the previous draw was double as well
         deck.clean_advantage_deck();
         reshuffle_modifier_deck(deck);
@@ -517,7 +517,7 @@ function double_draw(deck) {
 }
 
 function load_modifier_deck() {
-    var deck =
+    let deck =
         {
             name: "Monster modifier deck",
             type: DECK_TYPES.MODIFIER,
@@ -528,7 +528,7 @@ function load_modifier_deck() {
 
     deck.draw_top_discard = function() {
         if (this.discard.length > 0) {
-            var card = this.discard[this.discard.length-1];
+            let card = this.discard[this.discard.length-1];
             card.ui.set_depth(-3);
             card.ui.addClass("pull");
             card.ui.flip_up(true);
@@ -545,8 +545,8 @@ function load_modifier_deck() {
     }.bind(deck);
 
     deck.remove_card = function (card_type) {
-        for (var i = 0; i < deck.draw_pile.length; i++) {
-            if (deck.draw_pile[i].card_type == card_type) {
+        for (let i = 0; i < deck.draw_pile.length; i++) {
+            if (deck.draw_pile[i].card_type === card_type) {
                 deck.draw_pile.splice(i, 1);
                 reshuffle(deck, false);
 
@@ -584,9 +584,9 @@ function load_modifier_deck() {
     }.bind(deck);
 
     deck.clean_discard_pile = function () {
-        for (var i = 0; i < deck.discard.length; i++) {
-            if (this.discard[i].card_type == CARD_TYPES_MODIFIER.BLESS
-                || this.discard[i].card_type == CARD_TYPES_MODIFIER.CURSE) {
+        for (let i = 0; i < deck.discard.length; i++) {
+            if (this.discard[i].card_type === CARD_TYPES_MODIFIER.BLESS
+                || this.discard[i].card_type === CARD_TYPES_MODIFIER.CURSE) {
                 //Delete this curse/bless that has been used
                 this.discard.splice(i, 1);
                 i--;
@@ -606,10 +606,10 @@ function load_modifier_deck() {
             deck.discard[1].ui.removeClass("left");
         }
     }.bind(deck);
-    var loaded_deck = JSON.parse(get_from_storage("modifier_deck"));
+    let loaded_deck = JSON.parse(get_from_storage("modifier_deck"));
 
     MODIFIER_DECK.forEach(function (card_definition) {
-        var card = define_modifier_card(card_definition);
+        let card = define_modifier_card(card_definition);
         if (loaded_deck && find_in_discard_and_remove(loaded_deck.discard,card.card_type)) {
             deck.discard.push(card);
         } else {
@@ -621,7 +621,7 @@ function load_modifier_deck() {
 }
 
 function find_in_discard_and_remove(discard, card_type) {
-    for (var i=0; i < discard.length; i++) {
+    for (let i=0; i < discard.length; i++) {
         if (discard[i].card_type === card_type) {
             return discard.splice(i,1);
         }
@@ -630,18 +630,18 @@ function find_in_discard_and_remove(discard, card_type) {
 }
 
 function create_modifier_card_back() {
-    var card = document.createElement("div");
+    let card = document.createElement("div");
     card.className = "gl-card modifier back";
 
     return card;
 }
 
 function create_modifier_card_front(card_url) {
-    var img = document.createElement("img");
+    let img = document.createElement("img");
     img.className = "cover";
     img.src = card_url;
 
-    var card = document.createElement("div");
+    let card = document.createElement("div");
     card.className = "gl-card modifier front";
     card.appendChild(img);
 
@@ -649,10 +649,10 @@ function create_modifier_card_front(card_url) {
 }
 
 function define_modifier_card(card_definition) {
-    var card_front = create_modifier_card_front(card_definition.image);
-    var card_back = create_modifier_card_back();
+    let card_front = create_modifier_card_front(card_definition.image);
+    let card_back = create_modifier_card_back();
 
-    var card = {
+    let card = {
         ui: new UICard(card_front, card_back),
         card_type: card_definition.type,
         shuffle_next_round: card_definition.shuffle
@@ -670,9 +670,9 @@ function end_round() {
 }
 
 function load_definition(card_database) {
-    var decks = {};
-    for (var i = 0; i < card_database.length; i++) {
-        var definition = card_database[i];
+    let decks = {};
+    for (let i = 0; i < card_database.length; i++) {
+        let definition = card_database[i];
         decks[definition.class] = definition;
     }
 

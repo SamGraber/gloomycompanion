@@ -1,19 +1,27 @@
 import * as React from 'react';
 import './App.css';
-
-import logo from './logo.svg';
+import './migration/style.css';
+import './migration/cards.css';
+import './migration/util';
+import './migration/cards';
+import './migration/scenarios';
+import './migration/macros';
+import './migration/modifiers';
+import './migration/monster_stats';
+import './migration/app/card-logic';
+import './migration/app/level-selector';
+import './migration/app/deck-list';
+import './migration/app/scenario-list';
+import './migration/app/init';
+import './migration/logic';
+import './migration/ui';
+import { Migration } from './Migration';
 
 class App extends React.Component {
   public render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <Migration/>
       </div>
     );
   }

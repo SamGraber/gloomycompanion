@@ -1,19 +1,17 @@
-declare var create_input;
-
 class LevelSelector {
-    html;
-    spinner;
+    html: HTMLElement;
+    spinner: HTMLInputElement;
     private max_level = 7;
     
-    constructor(text, inline) {
+    constructor(text: string, inline: boolean) {
         this.html = inline ? document.createElement("span") : document.createElement("ul");
         this.html.className = "selectionlist";
     
-        var listitem = inline ? document.createElement("label") : document.createElement("li");
+        const listitem = inline ? document.createElement("label") : document.createElement("li");
         listitem.innerText = text;
         this.html.appendChild(listitem);
     
-        var level_spinner = create_input("number", "scenario_number", "1", "");
+        const level_spinner = create_input("number", "scenario_number", "1", "") as any;
         level_spinner.input.min = 0;
         level_spinner.input.max = this.max_level;
         this.html.appendChild(level_spinner.input);
@@ -21,10 +19,10 @@ class LevelSelector {
     }
     
     get_selection() {
-        return (this.spinner.value > this.max_level) ? this.max_level : this.spinner.value;
+        return (+this.spinner.value > this.max_level) ? this.max_level : this.spinner.value;
     }
 
-    set_value(value) {
-        this.spinner.value = (value > this.max_level) ? this.max_level : value;
+    set_value(value: number) {
+        this.spinner.value = ((value > this.max_level) ? this.max_level : value).toString();
     }
 }
