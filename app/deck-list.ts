@@ -1,21 +1,28 @@
+declare var create_button;
+declare var create_input;
+declare var DECKS;
+declare var dict_values;
+declare var is_checked;
+declare var input_value;
+declare var concat_arrays;
 
 function DeckList() {
-    var decklist = {};
-    decklist.ul = document.createElement("ul");
-    decklist.ul.className = "selectionlist";
+    var decklist = {} as any;
+    decklist.ul = document.createElement('ul');
+    decklist.ul.className = 'selectionlist';
     decklist.checkboxes = {};
     decklist.level_selectors = {};
     decklist.global_level_selector = null;
 
 
-    var listitem = document.createElement("li");
-    var global_level_selector = new LevelSelector("Select global level ", true);
+    var listitem = document.createElement('li');
+    var global_level_selector = new LevelSelector('Select global level ', true);
     listitem.appendChild(global_level_selector.html);
     decklist.global_level_selector = global_level_selector;
 
-    var dom_dict = create_button("button", "applylevel", "Apply All");
+    var dom_dict = create_button('button', 'applylevel', 'Apply All');
     dom_dict.onclick = function () {
-        for (key in decklist.level_selectors) {
+        for (const key in decklist.level_selectors) {
             decklist.level_selectors[key].set_value(decklist.global_level_selector.get_selection());
         }
     };
@@ -23,13 +30,13 @@ function DeckList() {
 
     decklist.ul.appendChild(listitem);
 
-    for (key in DECKS) {
+    for (const key in DECKS) {
         var real_name = DECKS[key].name;
-        var listitem = document.createElement("li");
-        var dom_dict = create_input("checkbox", "deck", real_name, real_name);
+        var listitem = document.createElement('li');
+        var dom_dict = create_input('checkbox', 'deck', real_name, real_name);
         listitem.appendChild(dom_dict.root);
 
-        var level_selector = new LevelSelector(" with level ", true);
+        var level_selector = new LevelSelector(' with level ', true);
         listitem.appendChild(level_selector.html);
 
         decklist.ul.appendChild(listitem);

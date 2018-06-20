@@ -1,28 +1,31 @@
+declare var create_input;
+declare var SPECIAL_RULES;
+declare var DECKS;
 
 function ScenarioList(scenarios) {
-    var scenariolist = {};
-    scenariolist.ul = document.createElement("ul");
-    scenariolist.ul.className = "selectionlist";
+    var scenariolist = {} as any;
+    scenariolist.ul = document.createElement('ul');
+    scenariolist.ul.className = 'selectionlist';
     scenariolist.spinner = null;
     scenariolist.decks = {};
     scenariolist.special_rules = {};
     scenariolist.level_selector = null;
 
-    scenariolist.level_selector = new LevelSelector("Select level", false);
+    scenariolist.level_selector = new LevelSelector('Select level', false);
 
     scenariolist.ul.appendChild(scenariolist.level_selector.html);
 
     for (var i = 0; i < scenarios.length; i++) {
         var scenario = scenarios[i];
         scenariolist.decks[i] = scenario.decks;
-        scenariolist.special_rules[i] = scenario.special_rules ? scenario.special_rules : "";
+        scenariolist.special_rules[i] = scenario.special_rules ? scenario.special_rules : '';
     }
 
-    var listitem = document.createElement("li");
-    listitem.innerText = "Select scenario number";
+    var listitem = document.createElement('li');
+    listitem.innerText = 'Select scenario number';
     scenariolist.ul.appendChild(listitem);
 
-    var scenario_spinner = create_input("number", "scenario_number", "1", "");
+    var scenario_spinner = create_input('number', 'scenario_number', '1', '');
     scenario_spinner.input.min = 1;
     scenario_spinner.input.max = scenarios.length;
     scenariolist.ul.appendChild(scenario_spinner.input);
@@ -49,8 +52,8 @@ function ScenarioList(scenarios) {
         return (this.decks[this.get_selection()].map(function (deck) {
             if (DECKS[deck.name]) {
                 deck.class = DECKS[deck.name].class;
-            } else if (deck.name.indexOf("Boss") != -1) {
-                deck.class = DECKS["Boss"].class;
+            } else if (deck.name.indexOf('Boss') != -1) {
+                deck.class = DECKS['Boss'].class;
             }
             deck.level = scenariolist.get_level(deck.name, scenariolist.get_special_rules());
             return deck;

@@ -1,14 +1,19 @@
+declare var SCENARIO_DEFINITIONS;
+declare var write_to_storage;
+declare var apply_deck_selection;
+declare var get_from_storage;
+declare var visible_ability_decks;
 
-function init() {
+(window as any).init = function init() {
     var deckspage = document.getElementById("deckspage");
     var scenariospage = document.getElementById("scenariospage");
     var applydeckbtn = document.getElementById("applydecks");
     var applyscenariobtn = document.getElementById("applyscenario");
     var applyloadbtn = document.getElementById("applyload");
-    var showmodifierdeck = document.getElementById("showmodifierdeck");
+    var showmodifierdeck = document.getElementById("showmodifierdeck") as HTMLInputElement;
 
-    var decklist = new DeckList();
-    var scenariolist = new ScenarioList(SCENARIO_DEFINITIONS);
+    var decklist = new (DeckList as any)();
+    var scenariolist = new (ScenarioList as any)(SCENARIO_DEFINITIONS);
 
     deckspage.insertAdjacentElement("afterbegin", decklist.ul);
     scenariospage.insertAdjacentElement("afterbegin", scenariolist.ul);
@@ -21,7 +26,7 @@ function init() {
             return load_ability_deck(deck_names.class, deck_names.name, deck_names.level);
         });
         apply_deck_selection(selected_decks, true);
-        var showmodifierdeck_deckspage = document.getElementById("showmodifierdeck-deckspage");
+        var showmodifierdeck_deckspage = document.getElementById("showmodifierdeck-deckspage") as HTMLInputElement;
         var modifier_deck_section = document.getElementById("modifier-container");
         if(!showmodifierdeck_deckspage.checked){
             modifier_deck_section.style.display = "none";
