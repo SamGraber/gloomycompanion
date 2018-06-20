@@ -196,7 +196,7 @@
     padding-bottom:             67.7%;              /* 100% / (card aspect ratio) */
 }
 
-.card
+.gl-card
 {
     position:                   absolute;
 
@@ -267,7 +267,7 @@
 }
 
 
-.card.front.pull
+.gl-card.front.pull
 {
     -webkit-animation-name:     pull-front;
     -webkit-animation-duration: 0.5s;
@@ -276,7 +276,7 @@
     animation-duration:         0.5s;
 }
 
-.card.back.pull
+.gl-card.back.pull
 {
     -webkit-animation-name:     pull-back;
     -webkit-animation-duration: 0.5s;
@@ -285,7 +285,7 @@
     animation-duration:         0.5s;
 }
 
-.card.lift
+.gl-card.lift
 {
     -webkit-animation-name:     lift;
     -webkit-animation-duration: 0.5s;
@@ -296,7 +296,7 @@
     animation-timing-function:  step-start;
 }
 
-.card.discard
+.gl-card.discard
 {
     top:                        1rem;
     left:                       1rem;
@@ -304,7 +304,7 @@
     right:                      0;
 }
 
-.card.draw
+.gl-card.draw
 {
     top:                        0;
     left:                       0;
@@ -320,22 +320,22 @@
     transition-delay:           0s,     0s,     0s,     0s,     0s,         0.4s;
 }
 
-.card.ability.front
+.gl-card.ability.front
 {
     background-image:           url(images/front.jpg);
 }
 
-.card.ability.back
+.gl-card.ability.back
 {
     background-image:           url(images/back.jpg);
 }
 
-.card.modifier.back
+.gl-card.modifier.back
 {
     background-image:           url(images/attack_mod_back.jpg);
 }
 
-.card.modifier.front img.cover
+.gl-card.modifier.front img.cover
 {
     position:                   absolute;
     top:                        0;
@@ -344,21 +344,21 @@
     height:                     100%;
 }
 
-.card.modifier.front.left img.cover
+.gl-card.modifier.front.left img.cover
 {
     left:                       -25%;
     -webkit-clip-path:          inset(0% 24.5% 0% 24.5%);
     clip-path:                  inset(0% 24.5% 0% 24.5%);
 }
 
-.card.modifier.front.right img.cover
+.gl-card.modifier.front.right img.cover
 {
     left:                       25%;
     -webkit-clip-path:          inset(0% 24.5% 0% 24.5%);
     clip-path:                  inset(0% 24.5% 0% 24.5%);
 }
 
-.card ul
+.gl-card ul
 {
     padding:                    0;
     margin:                     0;
@@ -369,7 +369,7 @@
     font-family:                'Nyala', 'Sakkal Majalla', 'Philosopher', sans-serif;
 }
 
-.card>ul
+.gl-card>ul
 {
     position:                   relative;
     height:                     100%;
@@ -392,13 +392,13 @@
     justify-content:            center;
 }
 
-.card li
+.gl-card li
 {
     margin:                     0.25em 0;
     margin-left:                17%;
 }
 
-.card li li
+.gl-card li li
 {
     font-size:                  75%;
     margin:                     0;
@@ -471,7 +471,7 @@ div.collapse
     z-index:                    1;
 }
 
-.card .initiative
+.gl-card .initiative
 {
     font-size:                  180%;
     text-align:                 center;
@@ -482,7 +482,7 @@ div.collapse
     width:                      19%;
 }
 
-.card .healthNormal
+.gl-card .healthNormal
 {
     font-size:                  130%;
     text-align:                 left;
@@ -493,7 +493,7 @@ div.collapse
     width:                      15%;
 }
 
-.card .healthElite
+.gl-card .healthElite
 {
 	color:						gold;
     font-size:                  130%;
@@ -505,7 +505,7 @@ div.collapse
     width:                      15%;
 }
 
-.card.front .name
+.gl-card.front .name
 {
     font-size:                  120%;
     text-align:                 center;
@@ -517,7 +517,7 @@ div.collapse
     line-height:                200%;
 }
 
-.card.back .name
+.gl-card.back .name
 {
     text-align:                 center;
     font-size:                  90%;
@@ -528,7 +528,7 @@ div.collapse
     width:                      100%;
 }
 
-.card .number
+.gl-card .number
 {
     font-family:                initial;
     font-size:                  30%;
@@ -547,7 +547,7 @@ img[src="images/shuffle.svg"]
     height:                     1.25em;
 }
 
-.card::selection
+.gl-card::selection
 {
     color:                      rgba(0, 0, 0, 0);
     background:                 rgba(0, 0, 0, 0);

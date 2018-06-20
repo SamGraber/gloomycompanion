@@ -37,8 +37,9 @@ function create_input(type, name, value, text)
     input.type = type;
     input.name = name;
     input.value = value;
-
-    var textnode = document.createTextNode(text);
+    
+    var textnode = document.createElement("span");
+    textnode.innerHTML = text;
 
     var label = document.createElement("label");
     label.appendChild(input);
@@ -49,10 +50,11 @@ function create_input(type, name, value, text)
 
 function create_button(type, id, value)
 {
-    var button = document.createElement("input");
+    var button = document.createElement("button");
     button.type = type;
+    button.className = "waves-effect waves-light btn";
     button.id = id;
-    button.value = value;
+    button.innerHTML = value;
 
     return button;
 }

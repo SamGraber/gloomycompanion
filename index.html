@@ -7,6 +7,7 @@
         <link rel="manifest" href="app.webmanifest" />
         <link rel="stylesheet" href="cards.css" />
         <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
         <meta charset="UTF-8">
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -19,7 +20,12 @@
         <script type="text/javascript" src="macros.js"></script>
         <script type="text/javascript" src="modifiers.js"></script>
         <script type="text/javascript" src="monster_stats.js"></script>
+        <script type="text/javascript" src="app/card-logic.js"></script>
         <script type="text/javascript" src="logic.js"></script>
+        <script type="text/javascript" src="app/level-selector.js"></script>
+        <script type="text/javascript" src="app/deck-list.js"></script>
+        <script type="text/javascript" src="app/scenario-list.js"></script>
+        <script type="text/javascript" src="app/init.js"></script>
         <script type="text/javascript" src="ui.js"></script>
     </head>
     <body onload="init(); init_ui();">
@@ -30,16 +36,29 @@
                     <li id="deckstab">Decks</li>
                 </ul>
                 <div id="scenariospage" class="tabbody">
-                    <input id="showmodifierdeck" type="checkbox" checked /><label for="showmodifierdeck">Show Monster Modifier Deck</label>
+                    <div class="switch">
+                        <label for="showmodifierdeck">
+                            <input id="showmodifierdeck" type="checkbox" checked />
+                            <span class="lever"></span>
+                            Show Monster Modifier Deck
+                        </label>
+                    </div>
                     <br>
-                    <input id="applyscenario" type="button" value="Apply" />
+                    <input id="applyscenario" class="waves-effect waves-light btn" type="button" value="Apply" />
                     <br>
-                    <input id="applyload" type="button" value="Load Previous Scenario" />
+                    <input id="applyload" class="waves-effect waves-light btn" type="button" value="Load Previous Scenario" />
                     <br>
                 </div>
                 <div id="deckspage" class="tabbody">
-                    <input id="showmodifierdeck-deckspage" type="checkbox" checked /><label for="showmodifierdeck-deckspage">Show Monster Modifier Deck</label>
-                    <input id="applydecks" type="button" value="Apply" />
+                    <div class="switch">
+                        <label for="showmodifierdeck-deckspage">
+                            <input id="showmodifierdeck-deckspage" type="checkbox" checked />
+                            <span class="lever"></span>
+                            Show Monster Modifier Deck
+                        </label>
+                    </div>
+                    <br/>
+                    <input id="applydecks" class="waves-effect waves-light btn" type="button" value="Apply" />
                 </div>
             </div>
             <div id="cancelarea">
@@ -55,5 +74,6 @@
         </div>
         <div id="tableau" style="font-size: 26.6px;"> <!-- base font size for all cards. Placed here to make it adjustable from javascript -->
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     </body>
 </html>
