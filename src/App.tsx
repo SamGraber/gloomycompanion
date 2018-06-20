@@ -18,6 +18,11 @@ import './migration/ui';
 import { Migration } from './Migration';
 
 class App extends React.Component {
+	componentDidMount() {
+		(window as any).init();
+		(window as any).init_ui();
+	}
+
 	public render() {
 		return (
 			<div className="App">
