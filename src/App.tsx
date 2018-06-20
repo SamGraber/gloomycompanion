@@ -18,13 +18,13 @@ import './migration/ui';
 import { Migration } from './Migration';
 
 class App extends React.Component {
-  public render() {
-    return (
-      <div className="App">
-        <Migration/>
-      </div>
-    );
-  }
+	public render() {
+		return (
+			<div className="App">
+				<Migration />
+			</div>
+		);
+	}
 }
 
 export default App;
