@@ -311,11 +311,11 @@
     bottom:                     1rem;
     right:                      1rem;
 
-    -webkit-transition-property: top,   left,   bottom, right,  -webkit-transform,  z-index;
-    -webkit-transition-duration: 0.4s,  0.4s,   0.4s,   0.4s,   0.4s,               0s;
+    -webkit-transition:         top,   left,   bottom, right,  -webkit-transform,  z-index;
+    -webkit-transition-duration:0.4s,  0.4s,   0.4s,   0.4s,   0.4s,               0s;
     -webkit-transition-delay:   0s,     0s,     0s,     0s,     0s,                 0.4s;
 
-    transition-property:        top,    left,   bottom, right,  transform,  z-index;
+    transition:                 top,    left,   bottom, right,  transform,  z-index;
     transition-duration:        0.4s,   0.4s,   0.4s,   0.4s,   0.4s,       0s;
     transition-delay:           0s,     0s,     0s,     0s,     0s,         0.4s;
 }
