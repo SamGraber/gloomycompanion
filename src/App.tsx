@@ -1,9 +1,8 @@
 import * as React from 'react';
 import './App.css';
 import './migration/style.css';
-import './migration/cards.css';
+import './migration/shim-window';
 import './migration/util';
-import './migration/cards';
 import './migration/scenarios';
 import './migration/macros';
 import './migration/modifiers';

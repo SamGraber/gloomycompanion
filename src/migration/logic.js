@@ -2,7 +2,6 @@
 window.do_shuffles = true;
 window.visible_ability_decks = [];
 window.modifier_deck = null;
-window.deck_definitions = window.load_definition(DECK_DEFINITONS);
 
 window.DECK_TYPES =
 {

@@ -1,4 +1,6 @@
-DECKS =
+import './cards.css';
+
+export const DECKS =
     {   "Ancient Artillery":  {name: "Ancient Artillery", class: "Ancient Artillery"}
     ,   "Bandit Archer":      {name: "Bandit Archer", class: "Archer"}
     ,   "Bandit Guard":       {name: "Bandit Guard", class: "Guard"}
@@ -36,7 +38,7 @@ DECKS =
     ,   "Wind Demon":         {name: "Wind Demon", class: "Wind Demon"}
 };
 
-DECK_DEFINITONS =
+export const DECK_DEFINITONS =
 [
         { class: "Ancient Artillery"
         , cards:
