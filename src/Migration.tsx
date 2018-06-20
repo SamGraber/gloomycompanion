@@ -1,39 +1,44 @@
 import * as React from 'react';
+import { Tabset } from './components/Tabset';
 
 export const Migration = () => (
 	<div>
 		<div className="panecontainer">
-			<div id="settingspane" className="pane expanded">
-				<ul className="tabcontainer">
-					<li id="scenariotab">Scenario</li>
-					<li id="deckstab">Decks</li>
-				</ul>
-				<div id="scenariospage" className="tabbody">
-					<div className="switch">
-						<label htmlFor="showmodifierdeck">
-							<input id="showmodifierdeck" type="checkbox" checked={true} />
-							<span className="lever" />
-							Show Monster Modifier Deck
-                        </label>
-					</div>
-					<br />
-					<input id="applyscenario" className="waves-effect waves-light btn" type="button" value="Apply" />
-					<br />
-					<input id="applyload" className="waves-effect waves-light btn" type="button" value="Load Previous Scenario" />
-					<br />
-				</div>
-				<div id="deckspage" className="tabbody">
-					<div className="switch">
-						<label htmlFor="showmodifierdeck-deckspage">
-							<input id="showmodifierdeck-deckspage" type="checkbox" checked={true} />
-							<span className="lever" />
-							Show Monster Modifier Deck
-                        </label>
-					</div>
-					<br />
-					<input id="applydecks" className="waves-effect waves-light btn" type="button" value="Apply" />
-				</div>
-			</div>
+			<Tabset>
+				{[
+					{
+						header: 'Scenario',
+						body: <div id="scenariospage">
+							<div className="switch">
+								<label htmlFor="showmodifierdeck">
+									<input id="showmodifierdeck" type="checkbox" checked={true} />
+									<span className="lever" />
+									Show Monster Modifier Deck
+								</label>
+							</div>
+							<br />
+							<input id="applyscenario" className="waves-effect waves-light btn" type="button" value="Apply" />
+							<br />
+							<input id="applyload" className="waves-effect waves-light btn" type="button" value="Load Previous Scenario" />
+							<br />
+						</div>,
+					},
+					{
+						header: 'Decks',
+						body: <div id="deckspage">
+							<div className="switch">
+								<label htmlFor="showmodifierdeck-deckspage">
+									<input id="showmodifierdeck-deckspage" type="checkbox" checked={true} />
+									<span className="lever" />
+									Show Monster Modifier Deck
+								</label>
+							</div>
+							<br />
+							<input id="applydecks" className="waves-effect waves-light btn" type="button" value="Apply" />
+						</div>,
+					},
+				]}
+			</Tabset>
 			<div id="cancelarea" />
 		</div>
 		<div>
