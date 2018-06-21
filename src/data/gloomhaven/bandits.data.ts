@@ -170,7 +170,7 @@ export const Bandits = {
 				level: 4,
 				type: 'elite',
 				health: 1,
-				attributes: ['%muddle', '%shield% 2'],
+				attributes: ['%muddle%', '%shield% 2'],
 			},
 			{
 				level: 5,
@@ -188,7 +188,7 @@ export const Bandits = {
 				level: 7,
 				type: 'elite',
 				move: -1,
-				attributes: ['%muddle', '%shield% 3'],
+				attributes: ['%muddle%', '%shield% 3'],
 			},
 		],
 	},
