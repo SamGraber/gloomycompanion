@@ -1,4 +1,4 @@
-import { MonsterClass } from '../monster-class';
+import { MonsterClass } from '../cards/monster-class';
 
 export const XCOMDecks: {[key: string]: { name: string, class?: MonsterClass, groupHeader?: boolean }} = {   
 	'XCOM':  			  {name: 'XCOM', groupHeader: true },

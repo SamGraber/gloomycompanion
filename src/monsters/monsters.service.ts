@@ -1,5 +1,5 @@
-import { MONSTER_STATS } from './data/gloomhaven-monsters';
-import { XCOMEnemies } from './data/xcom-enemies';
+import { MONSTER_STATS } from '../data/gloomhaven-monsters';
+import { XCOMEnemies } from '../data/xcom-enemies';
 
 class MonstersService {
 	monsters = {
