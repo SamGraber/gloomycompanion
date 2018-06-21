@@ -1,3 +1,3 @@
-import { DECKS } from '../cards/cards.data';
+import CardService from '../cards/cards.service';
 
-(window as any).DECKS = DECKS;
+(window as any).DECKS = CardService.decks;

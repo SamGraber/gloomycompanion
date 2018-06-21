@@ -2,10 +2,10 @@ import { DeckList } from './deck-list';
 import { ScenarioList } from './scenario-list';
 import CardService from '../../cards/cards.service';
 
-(window as any).deck_definitions = CardService.decks;
+(window as any).deck_definitions = CardService.deckDefinitions;
 
 (window as any).init = () => {
-	const deckspage = document.getElementById('deckspage') as HTMLElement;
+	// const deckspage = document.getElementById('deckspage') as HTMLElement;
 	const scenariospage = document.getElementById('scenariospage') as HTMLElement;
 	const applydeckbtn = document.getElementById('applydecks') as HTMLButtonElement;
 	const applyscenariobtn = document.getElementById('applyscenario') as HTMLButtonElement;
@@ -15,7 +15,7 @@ import CardService from '../../cards/cards.service';
 	const decklist = new (DeckList as any)();
 	const scenariolist = new (ScenarioList as any)((window as any).SCENARIO_DEFINITIONS);
 
-	deckspage.insertAdjacentElement('afterbegin', decklist.ul);
+	// deckspage.insertAdjacentElement('afterbegin', decklist.ul);
 	scenariospage.insertAdjacentElement('afterbegin', scenariolist.ul);
 
 	applydeckbtn.onclick = () => {

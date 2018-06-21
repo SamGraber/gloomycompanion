@@ -1,11 +1,27 @@
 import * as React from 'react';
 import { Tabset } from './components/Tabset';
+import { DeckList } from './components/DeckList';
 
 export const Migration = () => (
 	<div>
 		<div className="panecontainer">
 			<Tabset>
 				{[
+					{
+						header: 'Decks',
+						body: <div id="deckspage">
+							<DeckList/>
+							<div className="switch">
+								<label htmlFor="showmodifierdeck-deckspage">
+									<input id="showmodifierdeck-deckspage" type="checkbox" checked={true} />
+									<span className="lever" />
+									Show Monster Modifier Deck
+								</label>
+							</div>
+							<br />
+							<input id="applydecks" className="waves-effect waves-light btn" type="button" value="Apply" />
+						</div>,
+					},
 					{
 						header: 'Scenario',
 						body: <div id="scenariospage">
@@ -21,20 +37,6 @@ export const Migration = () => (
 							<br />
 							<input id="applyload" className="waves-effect waves-light btn" type="button" value="Load Previous Scenario" />
 							<br />
-						</div>,
-					},
-					{
-						header: 'Decks',
-						body: <div id="deckspage">
-							<div className="switch">
-								<label htmlFor="showmodifierdeck-deckspage">
-									<input id="showmodifierdeck-deckspage" type="checkbox" checked={true} />
-									<span className="lever" />
-									Show Monster Modifier Deck
-								</label>
-							</div>
-							<br />
-							<input id="applydecks" className="waves-effect waves-light btn" type="button" value="Apply" />
 						</div>,
 					},
 				]}

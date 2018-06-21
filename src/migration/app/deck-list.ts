@@ -1,4 +1,4 @@
-import { LevelSelector } from './level-selector';
+// import { LevelSelector } from './level-selector';
 
 export class DeckList {
     ul: HTMLUListElement;
@@ -7,42 +7,42 @@ export class DeckList {
     globalLevelSelector = null as any;
 
     constructor() {
-        this.ul = document.createElement('ul');
-        this.ul.className = 'selectionlist';
-        this.checkboxes = {};
-        this.levelSelectors = {};
-        this.globalLevelSelector = null;
+        // this.ul = document.createElement('ul');
+        // this.ul.className = 'selectionlist';
+        // this.checkboxes = {};
+        // this.levelSelectors = {};
+        // this.globalLevelSelector = null;
 
 
-        const listitem = document.createElement('li');
-        const globalLevelSelector = new LevelSelector('Select global level ', true);
-        listitem.appendChild(globalLevelSelector.html);
-        this.globalLevelSelector = globalLevelSelector;
+        // const listitem = document.createElement('li');
+        // const globalLevelSelector = new LevelSelector('Select global level ', true);
+        // listitem.appendChild(globalLevelSelector.html);
+        // this.globalLevelSelector = globalLevelSelector;
 
-        const domDict = (window as any).create_button('button', 'applylevel', 'Apply All');
-        domDict.onclick = () => {
-            for (const key in this.levelSelectors) {
-                this.levelSelectors[key].set_value(this.globalLevelSelector.get_selection());
-            }
-        };
-        listitem.appendChild(domDict);
+        // const domDict = (window as any).create_button('button', 'applylevel', 'Apply All');
+        // domDict.onclick = () => {
+        //     for (const key in this.levelSelectors) {
+        //         this.levelSelectors[key].set_value(this.globalLevelSelector.get_selection());
+        //     }
+        // };
+        // listitem.appendChild(domDict);
 
-        this.ul.appendChild(listitem);
+        // this.ul.appendChild(listitem);
 
-        for (const key in (window as any).DECKS) {
-            const realName = (window as any).DECKS[key].name;
-            const newListItem = document.createElement('li');
-            const newDomDict = (window as any).create_input('checkbox', 'deck', realName, realName);
-            newListItem.appendChild(newDomDict.root);
+        // for (const key in (window as any).DECKS) {
+        //     const realName = (window as any).DECKS[key].name;
+        //     const newListItem = document.createElement('li');
+        //     const newDomDict = (window as any).create_input('checkbox', 'deck', realName, realName);
+        //     newListItem.appendChild(newDomDict.root);
 
-            const levelSelector = new LevelSelector(' with level ', true);
-            newListItem.appendChild(levelSelector.html);
+        //     const levelSelector = new LevelSelector(' with level ', true);
+        //     newListItem.appendChild(levelSelector.html);
 
-            this.ul.appendChild(newListItem);
-            this.checkboxes[realName] = newDomDict.input;
-            this.levelSelectors[realName] = levelSelector;
+        //     this.ul.appendChild(newListItem);
+        //     this.checkboxes[realName] = newDomDict.input;
+        //     this.levelSelectors[realName] = levelSelector;
 
-        }
+        // }
     }
 
     get_selection() {

@@ -1,12 +1,13 @@
-import { DECK_DEFINITONS } from './cards.data';
+import { DECK_DEFINITONS, DECKS } from './cards.data';
 import { IDeck } from './deck.model';
 
 class CardsService {
-	decks: { [key: string]: IDeck } = {};
+	deckDefinitions: { [key: string]: IDeck } = {};
+	decks = DECKS;
 	
 	constructor() {
 		DECK_DEFINITONS.forEach(definition => {
-			this.decks[definition.class] = definition;
+			this.deckDefinitions[definition.class] = definition;
 		});
 	}
 }
