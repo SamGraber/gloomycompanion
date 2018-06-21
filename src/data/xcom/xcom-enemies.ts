@@ -74,8 +74,8 @@ export const XCOMEnemies = {
 			{
 				level: 4,
 				type: 'elite',
+				attack: 1,
 				range: 1,
-				attributes: ['%poison%'],
 			},
 			{
 				level: 5,

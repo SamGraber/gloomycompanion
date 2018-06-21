@@ -1,4 +1,4 @@
-import { MonsterClass } from '../cards/monster-class';
+import { MonsterClass } from '../../cards/monster-class';
 
 export const DECKS: {[key: string]: { name: string, class?: MonsterClass, groupHeader?: boolean }} = {   
 	'Base':  			  {name: 'Base', groupHeader: true },

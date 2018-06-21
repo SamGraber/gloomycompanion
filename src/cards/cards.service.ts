@@ -1,6 +1,6 @@
 import './cards.css';
-import { DECK_DEFINITONS, DECKS } from '../data/gloomhaven-cards.data';
-import { XCOMDecks } from '../data/xcom-cards.data';
+import { DECK_DEFINITONS, DECKS } from '../data/gloomhaven/gloomhaven-cards.data';
+import { XCOMDecks } from '../data/xcom/xcom-cards.data';
 import { IDeckDefinition } from './deck.model';
 
 class CardsService {

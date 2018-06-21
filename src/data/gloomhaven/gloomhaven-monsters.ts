@@ -1,458 +1,294 @@
 export const MONSTER_STATS = {
   'monsters': {
     'Ancient Artillery': {
-      'level': [
-        {
-          'level': 0,
-          'normal': {
-            'health': 4,
-            'move': 0,
-            'attack': 2,
-            'range': 4,
-            'attributes': []
-          },
-          'elite': {
-            'health': 7,
-            'move': 0,
-            'attack': 3,
-            'range': 5,
-            'attributes': []
-          }
-        },
-        {
-          'level': 1,
-          'normal': {
-            'health': 6,
-            'move': 0,
-            'attack': 2,
-            'range': 4,
-            'attributes': []
-          },
-          'elite': {
-            'health': 9,
-            'move': 0,
-            'attack': 3,
-            'range': 5,
-            'attributes': []
-          }
-        },
-        {
-          'level': 2,
-          'normal': {
-            'health': 7,
-            'move': 0,
-            'attack': 2,
-            'range': 5,
-            'attributes': []
-          },
-          'elite': {
-            'health': 11,
-            'move': 0,
-            'attack': 3,
-            'range': 6,
-            'attributes': []
-          }
-        },
-        {
-          'level': 3,
-          'normal': {
-            'health': 8,
-            'move': 0,
-            'attack': 3,
-            'range': 5,
-            'attributes': []
-          },
-          'elite': {
-            'health': 13,
-            'move': 0,
-            'attack': 4,
-            'range': 6,
-            'attributes': []
-          }
-        },
-        {
-          'level': 4,
-          'normal': {
-            'health': 9,
-            'move': 0,
-            'attack': 4,
-            'range': 5,
-            'attributes': []
-          },
-          'elite': {
-            'health': 13,
-            'move': 0,
-            'attack': 4,
-            'range': 6,
-            'attributes': [
-              '%target% 2'
-            ]
-          }
-        },
-        {
-          'level': 5,
-          'normal': {
-            'health': 11,
-            'move': 0,
-            'attack': 4,
-            'range': 6,
-            'attributes': []
-          },
-          'elite': {
-            'health': 15,
-            'move': 0,
-            'attack': 4,
-            'range': 7,
-            'attributes': [
-              '%target% 2'
-            ]
-          }
-        },
-        {
-          'level': 6,
-          'normal': {
-            'health': 14,
-            'move': 0,
-            'attack': 4,
-            'range': 6,
-            'attributes': []
-          },
-          'elite': {
-            'health': 16,
-            'move': 0,
-            'attack': 5,
-            'range': 7,
-            'attributes': [
-              '%target% 2'
-            ]
-          }
-        },
-        {
-          'level': 7,
-          'normal': {
-            'health': 16,
-            'move': 0,
-            'attack': 4,
-            'range': 7,
-            'attributes': []
-          },
-          'elite': {
-            'health': 20,
-            'move': 0,
-            'attack': 5,
-            'range': 7,
-            'attributes': [
-              '%target% 2'
-            ]
-          }
-        }
-      ]
+	  base: {
+		'health': 4,
+		'move': 0,
+		'attack': 2,
+		'range': 4,
+		'attributes': [],
+	  },
+	  upgrades: [
+		  {
+			  level: 1,
+			  type: 'normal',
+			  health: 2,
+		  },
+		  {
+			  level: 2,
+			  type: 'normal',
+			  health: 1,
+			  range: 1,
+		  },
+		  {
+			  level: 3,
+			  type: 'normal',
+			  health: 1,
+			  attack: 1,
+		  },
+		  {
+			  level: 4,
+			  type: 'normal',
+			  health: 1,
+			  attack: 1,
+		  },
+		  {
+			  level: 5,
+			  type: 'normal',
+			  health: 2,
+			  range: 1,
+		  },
+		  {
+			  level: 6,
+			  type: 'normal',
+			  health: 3,
+		  },
+		  {
+			  level: 7,
+			  type: 'normal',
+			  health: 2,
+			  range: 1,
+		  },
+		  {
+			  level: 0,
+			  type: 'elite',
+			  health: 3,
+			  attack: 1,
+			  range: 1,
+		  },
+		  {
+			  level: 1,
+			  type: 'elite',
+			  health: 2,
+		  },
+		  {
+			  level: 2,
+			  type: 'elite',
+			  health: 2,
+			  range: 1,
+		  },
+		  {
+			  level: 3,
+			  type: 'elite',
+			  health: 2,
+			  attack: 1,
+		  },
+		  {
+			  level: 4,
+			  type: 'elite',
+			  attributes: ['%target% 2'],
+		  },
+		  {
+			  level: 5,
+			  type: 'elite',
+			  health: 2,
+			  range: 1,
+		  },
+		  {
+			  level: 6,
+			  type: 'elite',
+			  health: 1,
+			  attack: 1,
+		  },
+		  {
+			  level: 7,
+			  type: 'elite',
+			  health: 4,
+		  },
+	  ],
     },
     'Bandit Archer': {
-      'level': [
-        {
-          'level': 0,
-          'normal': {
-            'health': 4,
-            'move': 2,
-            'attack': 2,
-            'range': 3,
-            'attributes': []
-          },
-          'elite': {
-            'health': 6,
-            'move': 2,
-            'attack': 3,
-            'range': 3,
-            'attributes': []
-          }
-        },
-        {
-          'level': 1,
-          'normal': {
-            'health': 5,
-            'move': 2,
-            'attack': 2,
-            'range': 4,
-            'attributes': []
-          },
-          'elite': {
-            'health': 7,
-            'move': 2,
-            'attack': 3,
-            'range': 5,
-            'attributes': []
-          }
-        },
-        {
-          'level': 2,
-          'normal': {
-            'health': 6,
-            'move': 3,
-            'attack': 2,
-            'range': 4,
-            'attributes': []
-          },
-          'elite': {
-            'health': 9,
-            'move': 3,
-            'attack': 3,
-            'range': 5,
-            'attributes': []
-          }
-        },
-        {
-          'level': 3,
-          'normal': {
-            'health': 6,
-            'move': 3,
-            'attack': 3,
-            'range': 4,
-            'attributes': []
-          },
-          'elite': {
-            'health': 10,
-            'move': 3,
-            'attack': 4,
-            'range': 5,
-            'attributes': []
-          }
-        },
-        {
-          'level': 4,
-          'normal': {
-            'health': 8,
-            'move': 3,
-            'attack': 3,
-            'range': 4,
-            'attributes': []
-          },
-          'elite': {
-            'health': 10,
-            'move': 3,
-            'attack': 4,
-            'range': 6,
-            'attributes': [
-              '%poison%'
-            ]
-          }
-        },
-        {
-          'level': 5,
-          'normal': {
-            'health': 10,
-            'move': 3,
-            'attack': 3,
-            'range': 5,
-            'attributes': []
-          },
-          'elite': {
-            'health': 12,
-            'move': 4,
-            'attack': 4,
-            'range': 6,
-            'attributes': [
-              '%poison%'
-            ]
-          }
-        },
-        {
-          'level': 6,
-          'normal': {
-            'health': 10,
-            'move': 3,
-            'attack': 4,
-            'range': 5,
-            'attributes': []
-          },
-          'elite': {
-            'health': 13,
-            'move': 4,
-            'attack': 5,
-            'range': 6,
-            'attributes': [
-              '%poison%'
-            ]
-          }
-        },
-        {
-          'level': 7,
-          'normal': {
-            'health': 13,
-            'move': 3,
-            'attack': 4,
-            'range': 5,
-            'attributes': []
-          },
-          'elite': {
-            'health': 17,
-            'move': 4,
-            'attack': 5,
-            'range': 6,
-            'attributes': [
-              '%poison%'
-            ]
-          }
-        }
-      ]
+		base: {
+			'health': 4,
+			'move': 2,
+			'attack': 2,
+			'range': 3,
+			'attributes': []
+		},
+		upgrades: [
+			{
+				level: 1,
+				type: 'normal',
+				health: 1,
+				range: 1,
+			},
+			{
+				level: 2,
+				type: 'normal',
+				health: 1,
+				move: 1,
+			},
+			{
+				level: 3,
+				type: 'normal',
+				attack: 1,
+			},
+			{
+				level: 4,
+				type: 'normal',
+				health: 2,
+			},
+			{
+				level: 5,
+				type: 'normal',
+				health: 2,
+				range: 1,
+			},
+			{
+				level: 6,
+				type: 'normal',
+				attack: 1,
+			},
+			{
+				level: 7,
+				type: 'normal',
+				health: 3,
+			},
+			{
+				level: 0,
+				type: 'elite',
+				health: 2,
+				attack: 1,
+			},
+			{
+				level: 1,
+				type: 'elite',
+				health: 1,
+				range: 2,
+			},
+			{
+				level: 2,
+				type: 'elite',
+				health: 2,
+				move: 1,
+			},
+			{
+				level: 3,
+				type: 'elite',
+				health: 1,
+				attack: 1,
+			},
+			{
+				level: 4,
+				type: 'elite',
+				range: 1,
+				attributes: ['%poison%'],
+			},
+			{
+				level: 5,
+				type: 'elite',
+				health: 2,
+				move: 1,
+			},
+			{
+				level: 6,
+				type: 'elite',
+				health: 1,
+				attack: 1,
+			},
+			{
+				level: 7,
+				type: 'elite',
+				health: 4,
+			},
+		],
     },
     'Bandit Guard': {
-      'level': [
-        {
-          'level': 0,
-          'normal': {
-            'health': 5,
+		base: {
+			'health': 5,
             'move': 2,
             'attack': 2,
             'range': 0,
             'attributes': []
-          },
-          'elite': {
-            'health': 9,
-            'move': 2,
-            'attack': 3,
-            'range': 0,
-            'attributes': []
-          }
-        },
-        {
-          'level': 1,
-          'normal': {
-            'health': 6,
-            'move': 3,
-            'attack': 2,
-            'range': 0,
-            'attributes': []
-          },
-          'elite': {
-            'health': 9,
-            'move': 2,
-            'attack': 3,
-            'range': 0,
-            'attributes': [
-              '%shield% 1'
-            ]
-          }
-        },
-        {
-          'level': 2,
-          'normal': {
-            'health': 6,
-            'move': 3,
-            'attack': 3,
-            'range': 0,
-            'attributes': []
-          },
-          'elite': {
-            'health': 10,
-            'move': 2,
-            'attack': 4,
-            'range': 0,
-            'attributes': [
-              '%shield% 1'
-            ]
-          }
-        },
-        {
-          'level': 3,
-          'normal': {
-            'health': 9,
-            'move': 3,
-            'attack': 3,
-            'range': 0,
-            'attributes': []
-          },
-          'elite': {
-            'health': 10,
-            'move': 3,
-            'attack': 4,
-            'range': 0,
-            'attributes': [
-              '%shield% 2'
-            ]
-          }
-        },
-        {
-          'level': 4,
-          'normal': {
-            'health': 10,
-            'move': 4,
-            'attack': 3,
-            'range': 0,
-            'attributes': []
-          },
-          'elite': {
-            'health': 11,
-            'move': 3,
-            'attack': 4,
-            'range': 0,
-            'attributes': [
-              '%muddle%',
-              '%shield% 2'
-            ]
-          }
-        },
-        {
-          'level': 5,
-          'normal': {
-            'health': 11,
-            'move': 4,
-            'attack': 4,
-            'range': 0,
-            'attributes': []
-          },
-          'elite': {
-            'health': 12,
-            'move': 3,
-            'attack': 5,
-            'range': 0,
-            'attributes': [
-              '%muddle%',
-              '%shield% 2'
-            ]
-          }
-        },
-        {
-          'level': 6,
-          'normal': {
-            'health': 14,
-            'move': 4,
-            'attack': 4,
-            'range': 0,
-            'attributes': []
-          },
-          'elite': {
-            'health': 14,
-            'move': 4,
-            'attack': 5,
-            'range': 0,
-            'attributes': [
-              '%muddle%',
-              '%shield% 2'
-            ]
-          }
-        },
-        {
-          'level': 7,
-          'normal': {
-            'health': 16,
-            'move': 5,
-            'attack': 4,
-            'range': 0,
-            'attributes': []
-          },
-          'elite': {
-            'health': 14,
-            'move': 3,
-            'attack': 5,
-            'range': 0,
-            'attributes': [
-              '%muddle%',
-              '%shield% 3'
-            ]
-          }
-        }
-      ]
+		},
+		upgrades: [
+			{
+				level: 1,
+				type: 'normal',
+				health: 1,
+				move: 1,
+			},
+			{
+				level: 2,
+				type: 'normal',
+				attack: 1,
+			},
+			{
+				level: 3,
+				type: 'normal',
+				health: 3,
+			},
+			{
+				level: 4,
+				type: 'normal',
+				health: 1,
+				move: 1,
+			},
+			{
+				level: 5,
+				type: 'normal',
+				health: 1,
+				attack: 1,
+			},
+			{
+				level: 6,
+				type: 'normal',
+				health: 3,
+			},
+			{
+				level: 7,
+				type: 'normal',
+				health: 2,
+				move: 1,
+			},
+			{
+				level: 0,
+				type: 'elite',
+				health: 4,
+				attack: 1,
+			},
+			{
+				level: 1,
+				type: 'elite',
+				attributes: ['%shield% 1'],
+			},
+			{
+				level: 2,
+				type: 'elite',
+				health: 1,
+				attack: 1,
+			},
+			{
+				level: 3,
+				type: 'elite',
+				move: 1,
+				attributes: ['%shield% 2'],
+			},
+			{
+				level: 4,
+				type: 'elite',
+				health: 1,
+				attributes: ['%muddle', '%shield% 2'],
+			},
+			{
+				level: 5,
+				type: 'elite',
+				health: 1,
+				attack: 1,
+			},
+			{
+				level: 6,
+				type: 'elite',
+				health: 2,
+				move: 1,
+			},
+			{
+				level: 7,
+				type: 'elite',
+				move: -1,
+				attributes: ['%muddle', '%shield% 3'],
+			},
+		],
     },
     'Black Imp': {
       'level': [
