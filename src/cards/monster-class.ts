@@ -27,4 +27,8 @@ export type MonsterClass
 	| 'Stone Golem'
 	| 'Sun Demon'
 	| 'Scout'
-	| 'Wind Demon';
+	| 'Wind Demon'
+	
+	// XCOM
+	| 'Officer'
+	| 'Purifier';

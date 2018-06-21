@@ -1,6 +1,6 @@
 import './cards.css';
 import { DECK_DEFINITONS, DECKS } from '../data/gloomhaven/gloomhaven-cards.data';
-import { XCOMDecks } from '../data/xcom/xcom-cards.data';
+import { XCOMClasses, XCOMDecks } from '../data/xcom';
 import { IDeckDefinition } from './deck.model';
 
 class CardsService {
@@ -9,6 +9,9 @@ class CardsService {
 	
 	constructor() {
 		DECK_DEFINITONS.forEach(definition => {
+			this.deckDefinitions[definition.class] = definition;
+		});
+		XCOMClasses.forEach(definition => {
 			this.deckDefinitions[definition.class] = definition;
 		});
 	}
