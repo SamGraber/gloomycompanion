@@ -1,7 +1,7 @@
-import './cards.css';
-import { MonsterClass } from './monster-class';
+import { MonsterClass } from '../monster-class';
 
-export const DECKS: {[key: string]: { name: string, class: MonsterClass }} = {   
+export const DECKS: {[key: string]: { name: string, class?: MonsterClass, groupHeader?: boolean }} = {   
+	'Base':  			  {name: 'Base', groupHeader: true },
 	'Ancient Artillery':  {name: 'Ancient Artillery', class: 'Ancient Artillery' },
 	'Bandit Archer':      {name: 'Bandit Archer', class: 'Archer'},
 	'Bandit Guard':       {name: 'Bandit Guard', class: 'Guard'},

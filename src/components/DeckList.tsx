@@ -25,13 +25,16 @@ export class DeckList extends React.Component<any, any> {
 	}
 
 	selectDeck = (event) => {
-		const selectedDecks = [...this.state.selectedDecks, this.state.unselectedDecks[event.target.value]];
-		const unselectedDecks = [...this.state.unselectedDecks];
-		unselectedDecks.splice(event.target.value, 1);
-		this.setState({
-			selectedDecks,
-			unselectedDecks,
-		});
+		const deck = this.state.unselectedDecks[event.target.value];
+		if (!deck.groupHeader) {
+			const selectedDecks = [...this.state.selectedDecks, deck];
+			const unselectedDecks = [...this.state.unselectedDecks];
+			unselectedDecks.splice(event.target.value, 1);
+			this.setState({
+				selectedDecks,
+				unselectedDecks,
+			});
+		}
 	}
 
 	deleteDeck = (deckIndex) => {
@@ -72,7 +75,11 @@ export class DeckList extends React.Component<any, any> {
 					>
 						<MenuItem value=""><em>None</em></MenuItem>
 						{this.state.unselectedDecks.map((deck, index) => (
-							<MenuItem key={index} value={index}>{deck.name}</MenuItem>
+							<MenuItem key={index} value={index}>
+								{deck.groupHeader
+								? <b>{deck.name}</b>
+								: deck.name}
+							</MenuItem>
 						))}
 					</Select>
 				</FormControl>
