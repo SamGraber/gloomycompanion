@@ -1,4 +1,15 @@
-import { MONSTER_STATS } from '../data/gloomhaven';
+import {
+	Bandits,
+	Beasts,
+	Bosses,
+	CityEnemies,
+	Demons,
+	Harrowers,
+	Imps,
+	MechanicalMonsters,
+	SavvasEnemies,
+	Undead,
+} from '../data/gloomhaven';
 import { XCOMEnemies } from '../data/xcom/xcom-enemies';
 
 interface IMonsterCollection {
@@ -38,13 +49,22 @@ class MonstersService {
 	constructor() {
 		this.monsters = {
 			monsters: {},
-			bosses: MONSTER_STATS.bosses,
+			bosses: Bosses,
 		};
-		Object.keys(MONSTER_STATS.monsters).forEach(key => {
-			this.monsters.monsters[key] = this.denormalizeMonsterStats(MONSTER_STATS.monsters[key]);
-		});
-		Object.keys(XCOMEnemies).forEach(key => {
-			this.monsters.monsters[key] = this.denormalizeMonsterStats(XCOMEnemies[key]);
+		const monsterData = {
+			...Bandits,
+			...Beasts,
+			...CityEnemies,
+			...Demons,
+			...Harrowers,
+			...Imps,
+			...MechanicalMonsters,
+			...SavvasEnemies,
+			...Undead,
+			...XCOMEnemies,
+		};
+		Object.keys(monsterData).forEach(key => {
+			this.monsters.monsters[key] = this.denormalizeMonsterStats(monsterData[key]);
 		});
 	}
 
