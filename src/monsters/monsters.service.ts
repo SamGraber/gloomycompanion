@@ -87,7 +87,7 @@ class MonstersService {
 			}],
 		};
 		Array.from(new Array(7)).map((x, index) => index + 1).forEach(level => {
-			const previousLevel = newMonster.level.find(x => x.level === level - 1) as any;
+			const previousLevel = newMonster.level[level - 1] as any;
 			const newLevel = {
 				level,
 				normal: this.applyUpgrade(previousLevel.normal, upgrades.find(x => x.level === level && x.type === 'normal')),
