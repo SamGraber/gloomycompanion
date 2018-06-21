@@ -10,7 +10,7 @@ import {
 	SavvasEnemies,
 	Undead,
 } from '../data/gloomhaven';
-import { XCOMEnemies } from '../data/xcom/xcom-enemies';
+import { Advent } from '../data/xcom';
 
 interface IMonsterCollection {
 	monsters: { [key: string]: IMonster };
@@ -61,7 +61,8 @@ class MonstersService {
 			...MechanicalMonsters,
 			...SavvasEnemies,
 			...Undead,
-			...XCOMEnemies,
+			
+			...Advent,
 		};
 		Object.keys(monsterData).forEach(key => {
 			this.monsters.monsters[key] = this.denormalizeMonsterStats(monsterData[key]);

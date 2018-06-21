@@ -1,4 +1,4 @@
-export const XCOMEnemies = {
+export const Advent = {
 	'Advent Trooper': {
 		base: {
 			'health': 4,
