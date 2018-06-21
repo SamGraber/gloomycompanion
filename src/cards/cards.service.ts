@@ -1,8 +1,8 @@
 import { DECK_DEFINITONS, DECKS } from './cards.data';
-import { IDeck } from './deck.model';
+import { IDeckDefinition } from './deck.model';
 
 class CardsService {
-	deckDefinitions: { [key: string]: IDeck } = {};
+	deckDefinitions: { [key: string]: IDeckDefinition } = {};
 	decks = DECKS;
 	
 	constructor() {
