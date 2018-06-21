@@ -31,4 +31,5 @@ export type MonsterClass
 	
 	// XCOM
 	| 'Officer'
-	| 'Purifier';
+	| 'Purifier'
+	| 'Sectoid';

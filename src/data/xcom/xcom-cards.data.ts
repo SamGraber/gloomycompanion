@@ -5,6 +5,7 @@ export const XCOMDecks: {[key: string]: { name: string, class?: MonsterClass, gr
 	'Advent Trooper':  	  {name: 'Advent Trooper', class: 'Archer' },
 	'Advent Officer':  	  {name: 'Advent Officer', class: 'Officer' },
 	'Advent Purifier': 	  {name: 'Advent Purifier', class: 'Purifier' },
+	'Sectoid': 			  {name: 'Sectoid', class: 'Sectoid' },
 };
 
 export const XCOMClasses: { class: MonsterClass, cards: any[] }[] = [
@@ -31,6 +32,19 @@ export const XCOMClasses: { class: MonsterClass, cards: any[] }[] = [
 		, [false, '77', '* %attack% +1', '** Target all adjacent enemies']
 		, [true,  '30', '* <span class="small">All adjacent enemies<br/>suffer 2 damage.</span>', '* %move% +0', '* %attack% -2', '** %range% +0', '** %wound%', '** %target% 2']
 		, [false, '08', '* %move% -1', '* <span class="small"> Create a 4 damage trap in an adjacent empty hex closest to an enemy </span>', '* %fire%']
+		]
+	},
+	{ 
+		class: 'Sectoid',
+		cards:
+		[ [false, '08', '* %move% +0', '** %disarm% one enemy in range']
+		, [false, '08', '* %move% -1', '** %stun% one enemy in range']
+		, [false, '09', '* %move% +1', '* %attack% -1', '** %curse%']
+		, [true,  '23', '* %move% +0', '** Summon normal Reanimate']
+		, [true,  '23', '* %move% +0', '** Summon normal Reanimate']
+		, [false, '62', '* %move% +0', '* %attack% +0']
+		, [false, '89', '* %move% -1', '** <span class="small">Mind Control target enemy unit on draw of +0 or better. Mind controlled units move as enemies until the controlling sectoid is killed or controls another unit.</span>']
+		, [false, '89', '* %move% -1', '** <span class="small">Mind Control target enemy unit on draw of +0 or better. Mind controlled units move as enemies until the controlling sectoid is killed or controls another unit.</span>']
 		]
 	},
 ];

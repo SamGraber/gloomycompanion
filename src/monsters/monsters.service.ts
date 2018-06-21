@@ -10,7 +10,7 @@ import {
 	SavvasEnemies,
 	Undead,
 } from '../data/gloomhaven';
-import { Advent } from '../data/xcom';
+import { Advent, Aliens } from '../data/xcom';
 import { ConversionService } from './conversion';
 
 interface IMonsterCollection {
@@ -64,6 +64,7 @@ class MonstersService {
 			...Undead,
 
 			...Advent,
+			...Aliens,
 		};
 		const conversion = new ConversionService(Harrowers);
 		console.log('Normalized monsters', conversion.monsters);
