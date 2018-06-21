@@ -9,7 +9,6 @@ import './migration/modifiers';
 import './migration/monster_stats';
 import './migration/app/card-logic';
 import './migration/app/level-selector';
-import './migration/app/deck-list';
 import './migration/app/scenario-list';
 import './migration/app/init';
 import './migration/logic';
