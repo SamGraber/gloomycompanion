@@ -18,7 +18,7 @@ export const Migration = () => (
 						body: <div id="scenariospage">
 							<div className="switch">
 								<label htmlFor="showmodifierdeck">
-									<input id="showmodifierdeck" type="checkbox" checked={true} />
+									<input id="showmodifierdeck" type="checkbox" defaultChecked={true} />
 									<span className="lever" />
 									Show Monster Modifier Deck
 								</label>
