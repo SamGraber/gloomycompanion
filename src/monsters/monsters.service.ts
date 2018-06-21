@@ -11,13 +11,14 @@ import {
 	Undead,
 } from '../data/gloomhaven';
 import { Advent } from '../data/xcom';
+import { ConversionService } from './conversion';
 
 interface IMonsterCollection {
 	monsters: { [key: string]: IMonster };
 	bosses: { [key: string]: any };
 }
 
-interface IMonster {
+export interface IMonster {
 	level: {
 		level: number;
 		normal: IMonsterStats;
@@ -35,7 +36,7 @@ interface IMonster {
 	}[];
 }
 
-interface IMonsterStats {
+export interface IMonsterStats {
 	health: number;
 	move: number;
 	attack: number;
@@ -61,9 +62,12 @@ class MonstersService {
 			...MechanicalMonsters,
 			...SavvasEnemies,
 			...Undead,
-			
+
 			...Advent,
 		};
+		const conversion = new ConversionService(Harrowers);
+		console.log('Normalized monsters', conversion.monsters);
+
 		Object.keys(monsterData).forEach(key => {
 			this.monsters.monsters[key] = this.denormalizeMonsterStats(monsterData[key]);
 		});

@@ -21,7 +21,8 @@
       "allow-snake-case"
     ],
     "array-type": [true, "array"],
-    "forin": false
+    "forin": false,
+    "no-console": false
   },
   "jsRules": {
     "ordered-imports": false,
