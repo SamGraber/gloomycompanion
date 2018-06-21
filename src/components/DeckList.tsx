@@ -5,20 +5,23 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import CardService from '../cards/cards.service';
 import './DeckList.css';
 import { DeckSelection } from './DeckSelection';
+import { IDeck } from '../cards/deck.model';
 
 export class DeckList extends React.Component<any, any> {
 	state = {
+		level: 1,
 		unselectedDecks: Object.keys(CardService.decks).map(key => CardService.decks[key]),
-		selectedDecks: [] as { name: string }[],
+		selectedDecks: [] as IDeck[],
+		showModifierDeck: true,
 	};
-	
+
 	setGlobalLevel = (level) => {
-		// for (const key in this.levelSelectors) {
-		// 	this.levelSelectors[key].set_value(this.globalLevelSelector.get_selection());
-		// }
+		this.setState({ level });
 	}
 
 	selectDeck = (event) => {
@@ -42,61 +45,21 @@ export class DeckList extends React.Component<any, any> {
 		});
 	}
 
-     // const domDict = (window as any).create_button('button', 'applylevel', 'Apply All');
-        // domDict.onclick = () => {
-        //     for (const key in this.levelSelectors) {
-        //         this.levelSelectors[key].set_value(this.globalLevelSelector.get_selection());
-        //     }
-        // };
-        // listitem.appendChild(domDict);
+	toggleModifierDeck = (event) => {
+		this.setState({ showModifierDeck: event.target.checked });
+	}
 
-        // for (const key in (window as any).DECKS) {
-        //     const realName = (window as any).DECKS[key].name;
-        //     const newListItem = document.createElement('li');
-        //     const newDomDict = (window as any).create_input('checkbox', 'deck', realName, realName);
-        //     newListItem.appendChild(newDomDict.root);
+	applySelections = () => {
+		const selectedDecks = this.state.selectedDecks.map((deck: IDeck) => ({
+			...deck,
+			level: this.state.level,
+		}));
+		(window as any).applyDeckSelections(selectedDecks, this.state.showModifierDeck);
+	}
 
-        //     const levelSelector = new LevelSelector(' with level ', true);
-        //     newListItem.appendChild(levelSelector.html);
-
-        //     this.ul.appendChild(newListItem);
-        //     this.checkboxes[realName] = newDomDict.input;
-        //     this.levelSelectors[realName] = levelSelector;
-
-        // }
-
-    // get_selection() {
-    //     return (window as any).dict_values(this.checkboxes).filter((window as any).is_checked).map((window as any).input_value);
-    // }
-
-    // get_selected_decks() {
-    //     const selectedCheckbox = this.get_selection();
-    //     const selectedDecks = (window as any).concat_arrays(selectedCheckbox.map((name: string) => {
-    //         const deck = ((name in (window as any).DECKS) ? (window as any).DECKS[name] : []);
-    //         deck.level = this.levelSelectors[name].get_selection();
-    //         return deck;
-    //     }));
-    //     return selectedDecks;
-    // }
-
-    // set_selection(selectedDeckNames: any) {
-    //     (window as any).dict_values(this.checkboxes).forEach((checkbox) => {
-    //         checkbox.checked = false;
-    //     });
-
-    //     selectedDeckNames.forEach((deckNames: any) => {
-    //         const checkbox = this.checkboxes[deckNames.name];
-    //         if (checkbox) {
-    //             checkbox.checked = true;
-    //             this.levelSelectors[deckNames.name].set_value(deckNames.level);
-    //         }
-    //     });
-	// }
-	
 	render() {
 		return <div className="deck-list">
-			<div><LevelSelector label="Select global level" /></div>
-			<div><Button variant="raised">Apply all</Button></div>
+			<div><LevelSelector label="Select global level" setLevel={this.setGlobalLevel} /></div>
 			<div>
 				<FormControl className="deck-selector">
 					<InputLabel htmlFor="deck-selector">Decks</InputLabel>
@@ -116,9 +79,22 @@ export class DeckList extends React.Component<any, any> {
 			</div>
 			<ul className="selectionlist">
 				{this.state.selectedDecks.map((deck, index) => (
-					<DeckSelection key={index} deckIndex={index} deckName={deck.name} deleteDeck={this.deleteDeck}/>
+					<DeckSelection key={index} deckIndex={index} deckName={deck.name} deleteDeck={this.deleteDeck} />
 				))}
 			</ul>
+			<div>
+				<FormControlLabel
+					control={
+						<Switch
+							checked={this.state.showModifierDeck}
+							onChange={this.toggleModifierDeck}
+							value="showModifierDeck"
+						/>
+					}
+					label="Show monster modifier deck"
+				/>
+			</div>
+			<div><Button variant="raised" onClick={this.applySelections}>Apply</Button></div>
 		</div>
 	}
 }

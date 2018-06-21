@@ -9,6 +9,7 @@ export class LevelSelector extends React.Component<any, any> {
 	
 	setLevel = (event) => {
 		this.setState({ level: event.target.value });
+		this.props.setLevel(event.target.value);
 	}
     
     // get_selection() {

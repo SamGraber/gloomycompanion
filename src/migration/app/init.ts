@@ -5,9 +5,7 @@ import CardService from '../../cards/cards.service';
 (window as any).deck_definitions = CardService.deckDefinitions;
 
 (window as any).init = () => {
-	// const deckspage = document.getElementById('deckspage') as HTMLElement;
 	const scenariospage = document.getElementById('scenariospage') as HTMLElement;
-	const applydeckbtn = document.getElementById('applydecks') as HTMLButtonElement;
 	const applyscenariobtn = document.getElementById('applyscenario') as HTMLButtonElement;
 	const applyloadbtn = document.getElementById('applyload') as HTMLButtonElement;
 	const showmodifierdeck = document.getElementById('showmodifierdeck') as HTMLInputElement;
@@ -15,20 +13,17 @@ import CardService from '../../cards/cards.service';
 	const decklist = new (DeckList as any)();
 	const scenariolist = new (ScenarioList as any)((window as any).SCENARIO_DEFINITIONS);
 
-	// deckspage.insertAdjacentElement('afterbegin', decklist.ul);
 	scenariospage.insertAdjacentElement('afterbegin', scenariolist.ul);
 
-	applydeckbtn.onclick = () => {
+	(window as any).applyDeckSelections = (selectedDeckNames, showModifierDeck) => {
 		localStorage.clear();
-		const selectedDeckNames = decklist.get_selected_decks();
 		(window as any).write_to_storage('selected_deck_names', JSON.stringify(selectedDeckNames));
 		const selected_decks = selectedDeckNames.map((deck_names: any) => {
 			return (window as any).load_ability_deck(deck_names.class, deck_names.name, deck_names.level);
 		});
 		(window as any).apply_deck_selection(selected_decks, true);
-		const showmodifierdeck_deckspage = document.getElementById('showmodifierdeck-deckspage') as HTMLInputElement;
 		const modifierDeckSelection = document.getElementById('modifier-container') as HTMLElement;
-		if (!showmodifierdeck_deckspage.checked) {
+		if (!showModifierDeck) {
 			modifierDeckSelection.style.display = 'none';
 		}
 		else {

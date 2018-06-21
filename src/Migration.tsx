@@ -11,15 +11,6 @@ export const Migration = () => (
 						header: 'Decks',
 						body: <div id="deckspage">
 							<DeckList/>
-							<div className="switch">
-								<label htmlFor="showmodifierdeck-deckspage">
-									<input id="showmodifierdeck-deckspage" type="checkbox" checked={true} />
-									<span className="lever" />
-									Show Monster Modifier Deck
-								</label>
-							</div>
-							<br />
-							<input id="applydecks" className="waves-effect waves-light btn" type="button" value="Apply" />
 						</div>,
 					},
 					{
